@@ -26,3 +26,14 @@ To add compabitibilty with IE6, you have to add the following :
 Then, add the nyroModal functionnality to your links:
     $('YOUR SELECTOR').nyroModal();
 This will work on many kind of elements, depending of what you included as nyroModal filters (see below)
+
+##Functions availbale
+
+nyroModal comes with a lot of functions that tou could use through your programming.
+
+###nyroModal()
+This is obviously the most useful. It enables the nyroModal functionnality on the element where clicked or submitted for a form
+
+##Filters
+
+##Animations
