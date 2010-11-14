@@ -1,13 +1,15 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Dom filter
+ * 
+ * Depends:
+ * - filters.link
+ * 
+ * Before: filters.link
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-				- filters.link
-		*/
 		dom: {
 			is: function(nm) {
 				return nm._hasFilter('link') && !nm.store.link.url && nm.store.link.sel;

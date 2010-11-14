@@ -1,13 +1,15 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Gallery filter
+ * 
+ * Depends:
+ * - filters.title
+ * 
+ * Before: filters.title
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-				- filters.title
-		*/
 		gallery: {
 			is: function(nm) {
 				var ret = nm.opener.is('[rel]:not([rel=external], [rel=nofollow])');

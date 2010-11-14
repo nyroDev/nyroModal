@@ -1,12 +1,14 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Link filter
+ * 
+ * Depends:
+ * 
+ * Before: filters.gallery
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-		*/
 		link: {
 			is: function(nm) {
 				var ret = nm.opener.is('[href]');

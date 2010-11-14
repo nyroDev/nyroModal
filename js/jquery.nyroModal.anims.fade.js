@@ -1,6 +1,10 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Fade animations
+ * 
+ * Depends:
+ * 
  */
 jQuery(function($, undefined) {
 	$.nmAnims({
@@ -65,4 +69,6 @@ jQuery(function($, undefined) {
 			}
 		}
 	});
+	// Define fade aniamtions as default
+	$.nmObj({anim: {def: 'fade'}});
 });

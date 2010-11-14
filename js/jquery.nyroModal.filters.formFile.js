@@ -1,12 +1,14 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Form file filter
+ * 
+ * Depends:
+ * 
+ * Before: filters.form
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-		*/
 		formFile: {
 			is: function(nm) {
 				var ret = nm.opener.is('form[enctype="multipart/form-data"]');

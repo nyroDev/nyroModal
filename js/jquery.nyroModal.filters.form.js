@@ -1,12 +1,15 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Form filter
+ * 
+ * Depends:
+ * - filters.form
+ * 
+ * Before: filters.swf
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-		*/
 		form: {
 			is: function(nm) {
 				var ret = nm.opener.is('form');

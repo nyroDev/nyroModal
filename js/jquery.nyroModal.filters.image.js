@@ -1,12 +1,14 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Image filter
+ * 
+ * Depends:
+ * 
+ * Before: filters.dom
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-		*/
 		image: {
 			is: function(nm) {
 				return (new RegExp('[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\s*$', 'i')).test(nm.opener.attr('href'));

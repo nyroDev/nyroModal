@@ -1,13 +1,15 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Youtube filter
+ * 
+ * Depends:
+ * - filters.swf
+ * 
+ * Before: filters.iframeForm
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-				- filters.swf
-		*/
 		youtube: {
 			is: function(nm) {
 				var ret = nm._hasFilter('link') && nm.opener.attr('href').indexOf('http://www.youtube.com/watch?v=') == 0;

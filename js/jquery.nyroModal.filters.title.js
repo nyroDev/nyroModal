@@ -1,12 +1,14 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Title filter
+ * 
+ * Depends:
+ * 
+ * Before:
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-		*/
 		title: {
 			is: function(nm) {
 				return nm.opener.is('[title]');

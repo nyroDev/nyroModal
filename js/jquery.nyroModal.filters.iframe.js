@@ -1,12 +1,14 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * Iframe filter
+ * 
+ * Depends:
+ * 
+ * Before: filters.formFile
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-		*/
 		iframe: {
 			is: function(nm) {
 				var	target = nm.opener.attr('target') || '',

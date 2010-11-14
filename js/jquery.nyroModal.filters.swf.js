@@ -1,13 +1,15 @@
 /*
  * nyroModal v2.alpha
- *
+ * 
+ * SWF filter
+ * 
+ * Depends:
+ * - filters.link
+ * 
+ * Before: filters.image
  */
 jQuery(function($, undefined) {
 	$.nmFilters({
-		/*
-			depends:
-				- filters.link
-		*/
 		swf: {
 			is: function(nm) {
 				return nm._hasFilter('link') && nm.opener.is('[href$=.swf]');
