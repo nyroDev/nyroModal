@@ -1,7 +1,7 @@
 /*
  * nyroModal v2.alpha
  * 
- * Youtube filter
+ * Embedly filter
  * 
  * Depends:
  * 
