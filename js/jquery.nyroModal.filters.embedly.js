@@ -27,9 +27,32 @@ jQuery(function($, undefined) {
 					dataType: 'jsonp',
 					data: 'wmode=transparent&url='+nm.opener.attr('href'),
 					success: function(data) {
-						nm._setCont('<div>'+data.html+'</div>');
+						if (data.type == 'error')
+							nm._error();
+						else if (data.type == 'photo') {
+							nm.filters.push('image');
+							$('<img />')
+								.load(function() {
+									nm.elts.cont.addClass('nyroModalImg');
+									nm.elts.hidden.addClass('nyroModalImg');
+									nm._setCont(this);
+								}).error(function() {
+									nm._error();
+								})
+								.attr('src', data.url);
+						} else {
+							nm.store.embedly.w = data.width;
+							nm.store.embedly.h = data.height;
+							nm._setCont('<div>'+data.html+'</div>');
+						}
 					}
 				});
+			},
+			size: function(nm) {
+				if (nm.store.embedly.w && !nm.sizes.h) {
+					nm.sizes.w = nm.store.embedly.w;
+					nm.sizes.h = nm.store.embedly.h;
+				}
 			}
 		}
 	});
