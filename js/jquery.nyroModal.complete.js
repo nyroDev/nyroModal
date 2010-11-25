@@ -1005,7 +1005,7 @@ jQuery(function($, undefined) {
 				},
 				load: function(nm) {
 					var url = nm.store.link.url,
-						cont = '<div><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="'+nm.sizes.w+'" height="'+nm.sizes.h+'"><param name="movie" value="'+url+'"></param>',
+						cont = '<div><object id="nyroModalSwf" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="'+nm.sizes.w+'" height="'+nm.sizes.h+'"><param name="movie" value="'+url+'"></param>',
 						tmp = '';
 					$.each(nm.swf, function(name, val) {
 						cont+= '<param name="'+name+'" value="'+val+'"></param>';
