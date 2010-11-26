@@ -4,6 +4,7 @@
  * Embedly filter
  * 
  * Depends:
+ * - filters.link
  * 
  * Before: filters.iframeForm
  */

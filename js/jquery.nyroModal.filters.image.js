@@ -4,6 +4,7 @@
  * Image filter
  * 
  * Depends:
+ * - filters.link
  * 
  * Before: filters.dom
  */

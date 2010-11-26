@@ -4,6 +4,7 @@
  * Iframe filter
  * 
  * Depends:
+ * - filters.link
  * 
  * Before: filters.formFile
  */

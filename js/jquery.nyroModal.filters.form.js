@@ -4,7 +4,6 @@
  * Form filter
  * 
  * Depends:
- * - filters.form
  * 
  * Before: filters.swf
  */
