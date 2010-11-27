@@ -11,6 +11,7 @@ jQuery(function($, undefined) {
 		// nyroModal Object
 		_nmObj = {
 			filters: [],
+			callbacks: {},
 			loadFilter: undefined,
 			closeOnEscape: true,
 			closeOnClick: true,
@@ -271,6 +272,8 @@ jQuery(function($, undefined) {
 				$.each(this.filters, function(i, f) {
 					ret[f] = self._callFilter(f, fct);
 				});
+				if (this.callbacks[fct] && $.isFunction(this.callbacks[fct]))
+					this.callbacks[fct](this);
 				return ret;
 			},
 			_callFilter: function(f, fct) {

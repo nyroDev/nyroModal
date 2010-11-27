@@ -46,7 +46,7 @@ jQuery(function($, undefined) {
 				}
 			},
 			filledContent: function(nm) {
-				var link = _filters.gallery._getGalleryLink(nm, -1),
+				var link = this._getGalleryLink(nm, -1),
 					append = nm.elts.hidden.find(' > div');
 				if (link) {
 					$('<a />', {
@@ -60,7 +60,7 @@ jQuery(function($, undefined) {
 						})
 						.appendTo(append);
 				}
-				link = _filters.gallery._getGalleryLink(nm, 1);
+				link = this._getGalleryLink(nm, 1);
 				if (link) {
 					$('<a />', {
 							text: 'next',
@@ -85,10 +85,10 @@ jQuery(function($, undefined) {
 					nm.elts.cont.find('.nyroModalNext, .nyroModalPrev').remove();
 			},
 			galleryNext: function(nm) {
-				_filters.gallery._getGalleryLink(nm, 1).nyroModal(nm.getForNewLinks(), true).click();
+				this._getGalleryLink(nm, 1).nyroModal(nm.getForNewLinks(), true).click();
 			},
 			galleryPrev: function(nm) {
-				_filters.gallery._getGalleryLink(nm, -1).nyroModal(nm.getForNewLinks(), true).click();
+				this._getGalleryLink(nm, -1).nyroModal(nm.getForNewLinks(), true).click();
 			},
 			_getGalleryLink: function(nm, dir) {
 				if (nm.store.gallery) {
