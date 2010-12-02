@@ -26,14 +26,6 @@ jQuery(function($, undefined) {
 					nm.store.title = undefined;
 					delete(nm.store.title);
 				}
-			},
-			close: function(nm) {
-				if (nm.store.title) {
-					nm.store.title.remove();
-					nm.store.title = undefined;
-					delete(nm.store.title);
-					delete(nm.store.titleH);
-				}
 			}
 		}
 	});
