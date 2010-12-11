@@ -156,11 +156,11 @@ Here is how filters works:
 
 1. When $('element').nyroModal(); is called, the nyroModal object is created and attached to the DOM element instancied
 2. Every available filters are tested again the nyroModal object using the is function
-* If this function returns true, the filters will be used all the time for this element.
-* If it returns false, the filters will not be used anymore for this element
+   * If this function returns true, the filters will be used all the time for this element.
+   * If it returns false, the filters will not be used anymore for this element
 3. nyroModal core calls every init function of every filters selected for the element
-* These init function should bind the event they need, create their own object if needed
-* If the filters need to be the one used to load the content, the loadFilter setting of the nyroModal ovject should be defined to its name.
+   * These init function should bind the event they need, create their own object if needed
+   * If the filters need to be the one used to load the content, the loadFilter setting of the nyroModal ovject should be defined to its name.
 4. Througout the living of nyroModal, every function or callback defined in all selected filters will be called (see the list below)
 
 
