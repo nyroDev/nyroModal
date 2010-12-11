@@ -147,6 +147,12 @@ This could be useful to close them all at the same time:
       $(this).data('nmObj').close();
     }):
 
+
+## nyroModal Object
+Description of what is, how and when to use it.
+List of all of settings and functions
+
+
 ##Filters
 Filters are used to provide many basics functionnality like Ajax download, but it alos let you the ability to fully customize the way nyroModal work, by adding as many callbacks as you need.
 
@@ -173,10 +179,10 @@ All function or callbacks receive the same nyroModal object as a unique paramete
 
 The list of all function or callback that can be called in a filter:
 
-* is: should return true or false to select the filter for the current or element or not. This function is REQUIRED !
+* is: should return true or false to select the filter for the current or element or not. This function is **REQUIRED** !
 * init: called at the very beggining of the process. This function should bind element or create object needed later
 * initElts: called at the beggining of the open process, juste before the load start. After that, all the needed div are created and attached to the DOM
-* load: called only for ONE filter defined in nm.loadFilter attribute. This function should load the function and set it's content using the _setCont function
+* load: called only for ONE filter defined in nm.loadFilter attribute. This function should load the function and set it's content using the **_setCont** function
 * filledContent: called once the content is placed on the hidden div
 * error: called in case of error (URL not founr for example)
 * size: called after the size has been defined
@@ -208,10 +214,25 @@ Like the version 1, there is a bunch of others callback that you can define befo
 * afterresize: called just after the resize animation
 
 
+nyroModal automatically add 2 filters for every elements:
+
+* basic: used to provide basic functionnality. This filter **shouldn't be modified** unless you know exactly what you're doing
+* custom: This filter has absolutely no programming. It's added here juste to provide a quick way to add your filters callback
+
+
 There is some some basic filters that you can use on your project that enable the basic usage of this kind of plugin.
 Here is a list of the filters officially provided:
+
 * Title: Show the title for the modal using the title attribute of the opener element
-* Gallery: Enable arrows and navigation keys trough the element with the same rel attribute defined in the DOM
-* Link: Open
+* Gallery: Enable arrows and navigation keys trough the element with the same rel attribute defined in the DOM (depends on title)
+* Link: Bind a <a> element and load the target using Ajax to retrieve content 
+* Dom: Instead of using Ajax, it get the content within the page using an id. (exemple link : <a href="#myContent" />) (depends on link)
+* Image: Show an image, and resize it if needed (depends on link)
+* SWF: Show a SWf animation (depends on link)
+* Form: Bind a form and load the target by sending it's data trhough Ajax
+* Form file: Same as Form but used when form should send file
+* Iframe: Used to show data from an other domain name or when target="_blank" is present (depends on link)
+* Iframe form: Used to open a form in an iframe (depends iframe)
+* Embedly: Used to show a bunch of different element using [embedly API](http://embed.ly/) ([Examples](http://nyromodal.nyrodev.com/v2/embedly.php)) (depends on link)
 
 ##Animations
