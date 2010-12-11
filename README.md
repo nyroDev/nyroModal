@@ -225,7 +225,7 @@ Here is a list of the filters officially provided:
 
 * Title: Show the title for the modal using the title attribute of the opener element
 * Gallery: Enable arrows and navigation keys trough the element with the same rel attribute defined in the DOM (depends on title)
-* Link: Bind a <a> element and load the target using Ajax to retrieve content 
+* Link: Bind an anchor element and load the target using Ajax to retrieve content 
 * Dom: Instead of using Ajax, it get the content within the page using an id. (exemple link : <a href="#myContent" />) (depends on link)
 * Image: Show an image, and resize it if needed (depends on link)
 * SWF: Show a SWf animation (depends on link)
