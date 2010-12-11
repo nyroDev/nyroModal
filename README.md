@@ -148,5 +148,61 @@ This could be useful to close them all at the same time:
     }):
 
 ##Filters
+Filters are used to provide many basics functionnality like Ajax download, but it alos let you the ability to fully customize the way nyroModal work, by adding as many callbacks as you need.
+
+A filter is a set function that will be called by nyroModal core at many differents points. These functions call be used to do everything needed to make the modal work as you excpet or to add others behaviors needed for your projet: add some elements inside the modal, updating your page content, add some Ajax call, etc...
+
+Here is how filters works:
+1. When $('element').nyroModal(); is called, the nyroModal object is created and attached to the DOM element instancied
+2. Every available filters are tested again the nyroModal object using the is function
+ * If this function returns true, the filters will be used all the time for this element.
+ * If it returns false, the filters will not be used anymore for this element
+3. nyroModal core calls every init function of every filters selected for the element
+ * These init function should bind the event they need, create their own object if needed
+ * If the filters need to be the one used to load the content, the loadFilter setting of the nyroModal ovject should be defined to its name.
+4. Througout the living of nyroModal, every function or callback defined in all selected filters will be called (see the list below)
+
+All function or callbacks receive the same nyroModal object as a unique parameter.
+
+The list of all function or callback that can be called in a filter:
+* is: should return true or false to select the filter for the current or element or not. This function is REQUIRED !
+* init: called at the very beggining of the process. This function should bind element or create object needed later
+* initElts: called at the beggining of the open process, juste before the load start. After that, all the needed div are created and attached to the DOM
+* load: called only for ONE filter defined in nm.loadFilter attribute. This function should load the function and set it's content using the _setCont function
+* filledContent: called once the content is placed on the hidden div
+* error: called in case of error (URL not founr for example)
+* size: called after the size has been defined
+* close: called at the end of the closing process, regarding only the data (useful for gallery)
+* beforeClose: called at the beggining of the closing process, regarding the animation
+* afterClose: called at the end of the closing process, regarding the animation
+* keyHandle: called when a key is hit if the keyHandle is enable and if the modal is on the top
+
+Like the version 1, there is a bunch of others callback that you can define before and after every animation. The version 2 put it in a new way by letting you the ability to define a function before and after every animation function.
+* beforeShowBg: called just before the showBg animation
+* afterShowBg: called just after the showBg animation
+* beforeHideBg: called just before the hideBg animation
+* afterHideBg: called just after the hideBg animation
+* beforeShowLoad: called just before the showLoad animation
+* afterShowLoad: called just after the showLoad animation
+* beforeHideLoad: called just before the hideLoad animation
+* afterHideLoad: called just after the hideLoad animation
+* beforeShowCont: called just before the showCont animation (also called in case of a transition, before beforeHideTrans)
+* afterShowCont: called just after the showCont animation (also called in case of a transition, after afterHideTrans)
+* beforeHideCont: called just before the hideCont animation
+* afterHideCont: called just after the hideCont animation
+* beforeShowTrans: called just before the showTrans animation (transition)
+* afterShowTrans: called just after the showTrans animation (transition)
+* beforeHideTrans: called just before the hideTrans animation (transition)
+* afterHideTrans: called just after the hideTrans animation (transition)
+* beforeResize: called just before the resize animation
+* afterresize: called just after the resize animation
+
+To define a new filter, you need to provide at least one
+
+There is some some basic filters that you can use on your project that enable the basic usage of this kind of plugin.
+Here is a list of the filters officially provided:
+* Title: Show the title for the modal using the title attribute of the opener element
+* Gallery: Enable arrows and navigation keys trough the element with the same rel attribute defined in the DOM
+* Link: Open
 
 ##Animations
