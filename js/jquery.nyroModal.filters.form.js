@@ -1,5 +1,5 @@
 /*
- * nyroModal v2.alpha
+ * nyroModal v2.0.0
  * 
  * Form filter
  * 
@@ -24,9 +24,12 @@ jQuery(function($, undefined) {
 				});
 			},
 			load: function(nm) {
+				var data = nm.opener.serializeArray();
+				if (nm.store.form.sel)
+					data.push({name: nm.selIndicator, value: nm.store.form.sel});
 				$.ajax({
 					url: nm.store.form.url,
-					data: nm.opener.serializeArray(),
+					data: data,
 					type: nm.opener.attr('method') ? nm.opener.attr('method') : 'get',
 					success: function(data) {
 						nm._setCont(data, nm.store.form.sel);

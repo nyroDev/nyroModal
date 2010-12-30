@@ -1,5 +1,5 @@
 /*
- * nyroModal v2.alpha
+ * nyroModal v2.0.0
  * 
  * Link filter
  * 
@@ -26,6 +26,7 @@ jQuery(function($, undefined) {
 			load: function(nm) {
 				$.ajax({
 					url: nm.store.link.url,
+					data: nm.store.link.sel ? {nm.selIndicator: nm.store.link.sel} : undefined,
 					success: function(data) {
 						nm._setCont(data, nm.store.link.sel);
 					},

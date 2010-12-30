@@ -1,6 +1,6 @@
 /*
- * nyroModal v2.alpha
- * for IE6
+ * nyroModal v2.0.0
+ * For IE6
  *
  */
 jQuery(function($, undefined) {

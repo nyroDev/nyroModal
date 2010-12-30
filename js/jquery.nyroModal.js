@@ -1,5 +1,6 @@
 /*
- * nyroModal v2.alpha
+ * nyroModal v2.0.0
+ * Core
  *
  */
 jQuery(function($, undefined) {
@@ -10,56 +11,76 @@ jQuery(function($, undefined) {
 		baseHref = $('base').attr('href'),
 		// nyroModal Object
 		_nmObj = {
-			filters: [],
-			callbacks: {},
-			loadFilter: undefined,
-			closeOnEscape: true,
-			closeOnClick: true,
-			useKeyHandler: false,
+			filters: [],	// List of filters used
+			callbacks: {},	// Sepcific callbacks
+			loadFilter: undefined,	// Name of the filter used for loading
 
-			closeButton: '<a href="#" class="nyroModalClose nyroModalCloseButton nmReposition" title="close">Close</a>',
-			galleryLoop: true,
-			galleryCounts: true,
-			swf:  {
+			modal: false,	// Indicates if it's a modal window or not
+			closeOnEscape: true,	// Indicates if the modal should close on Escape key
+			closeOnClick: true,	// Indicates if a click on the background should close the modal
+			useKeyHandler: false,	// Indicates if the modal has to handle key down event
+
+			showCloseButton: true,	// Indicates if the closeButonn should be added
+			closeButton: '<a href="#" class="nyroModalClose nyroModalCloseButton nmReposition" title="close">Close</a>',	// Close button HTML
+
+			galleryLoop: true,	// Indicates if the gallery should loop
+			galleryCounts: true,	// Indicates if the gallery counts should be shown
+			ltr: true, // Left to Right by default. Put to false for Hebrew or Right to Left language. Used in gallery filter
+
+			selIndicator: 'nyroModalSel', // Value added when a form or Ajax is sent with a filter content
+
+			swf:  {	// Default SWF attributes
 				allowFullScreen: 'true',
 				allowscriptaccess: 'always',
 				wmode: 'transparent'
 			},
 
-			ltr: true, // Left to Right by default. Put to false for Hebrew or Right to Left language
-			store: {},
-			errorMsg: 'An error occured',
-			elts: {
+			store: {},	// Storage object for filters.
+			errorMsg: 'An error occured',	// Error message
+			elts: {	// HTML elements for the modal
 				all: undefined,
 				bg: undefined,
 				load: undefined,
 				cont: undefined,
 				hidden: undefined
 			},
-			sizes: {
-				initW: undefined,
-				initH: undefined,
-				w: undefined,
-				h: undefined,
-				wMargin: undefined,
-				hMargin: undefined
+			sizes: {	// Size information
+				initW: undefined,	// Initial width
+				initH: undefined,	// Initial height
+				w: undefined,		// width
+				h: undefined,		// height
+				wMargin: undefined,	// Horizontal margin
+				hMargin: undefined	// Vertical margin
 			},
-			anim: {
-				def: undefined,
-				showBg: undefined,
-				hideBg: undefined,
-				showLoad: undefined,
-				hideLoad: undefined,
-				showCont: undefined,
-				hideCont: undefined,
-				showTrans: undefined,
-				hideTrans: undefined,
-				resize: undefined
+			anim: {	// Animation names to use
+				def: undefined,			// Default animation set to use if sspecific are not defined or doesn't exist
+				showBg: undefined,		// Set to use for showBg animation
+				hideBg: undefined,		// Set to use for hideBg animation
+				showLoad: undefined,	// Set to use for showLoad animation
+				hideLoad: undefined,	// Set to use for hideLoad animation
+				showCont: undefined,	// Set to use for showCont animation
+				hideCont: undefined,	// Set to use for hideCont animation
+				showTrans: undefined,	// Set to use for showTrans animation
+				hideTrans: undefined,	// Set to use for hideTrans animation
+				resize: undefined		// Set to use for resize animation
 			},
 
+			_open: false,	// Indicates if the modal is open
+			_bgReady: false,	// Indicates if the background is ready
+			_opened: false,	// Indicates if the modal was opened (useful for stacking)
+			_loading: false,	// Indicates if the loading is shown
+			_animated: false,	// Indicates if the modal is currently animated
+			_transition: false,	//Indicates if the modal is in transition
+			_nmOpener: undefined,	// nmObj of the modal that opened the current one in non stacking mode
+			_nbContentLoading: 0,	// Counter for contentLoading call
+			_scripts: '',	// Scripts tags to be included
+			_scriptsShown: '',	//Scripts tags to be included once the modal is swhon
+
+			// save the object in data
 			saveObj: function() {
 				this.opener.data('nmObj', this);
 			},
+			// Open the modal
 			open: function() {
 				this.getInternal()._pushStack(this.opener);
 				this._opened = false;
@@ -86,6 +107,20 @@ jQuery(function($, undefined) {
 				}, this));
 			},
 
+			// Resize the modal according to sizes.initW and sizes.initH
+			// Will call size function
+			resize: function() {
+				this.sizes.w = this.sizes.initW;
+				this.sizes.h = this.sizes.initH;
+				this._unreposition();
+				this.size();
+				this._callAnim('resize', $.proxy(function() {
+					this._reposition();
+				}, this));
+			},
+
+			// Update sizes element to not go outsize the viewport.
+			// Will call 'size' callback filter
 			size: function() {
 				var maxHeight = this.getInternal().fullSize.viewH - this.sizes.hMargin,
 					maxWidth = this.getInternal().fullSize.viewW - this.sizes.wMargin;
@@ -97,15 +132,7 @@ jQuery(function($, undefined) {
 				this._callFilters('size');
 			},
 
-			resize: function() {
-				this.sizes.w = this.sizes.initW;
-				this.sizes.h = this.sizes.initH;
-				this._unreposition();
-				this.size();
-				this._callAnim('resize', $.proxy(function() {
-					this._reposition();
-				}, this));
-			},
+			// Get the nmObject for a new nyroModal
 			getForNewLinks: function() {
 				var ret = $.extend({}, this);
 				ret.filters = [];
@@ -116,22 +143,30 @@ jQuery(function($, undefined) {
 				// Think about stack or not
 				return ret;
 			},
+
+			// key handle function.
+			// Will call 'keyHandle' callback filter
 			keyHandle: function(e) {
 				this.keyEvent = e;
 				this._callFilters('keyHandle');
 				this.keyEvent = undefined;
 				delete(this.keyEvent);
 			},
+
+			// Get the internal object
 			getInternal: function() {
 				return _internal;
 			},
 
+			// Internal function for closing a nyroModal
+			// Will call 'close' callback filter
 			_close: function() {
 				this.getInternal()._removeStack(this.opener);
 				this._opened = false;
 				this._open = false;
 				this._callFilters('close');
 			},
+			// Public function for closing a nyroModal
 			close: function() {
 				this._close();
 				this._callFilters('beforeClose');
@@ -152,17 +187,7 @@ jQuery(function($, undefined) {
 				});
 			},
 
-			_open: false,
-			_bgReady: false,
-			_opened: false,
-			_loading: false,
-			_animated: false,
-			_nmOpener: undefined,
-			_transition: false,
-			_nbContentLoading: 0,
-			_scripts: '',
-			_scriptsShown: '',
-
+			// Init HTML elements
 			_initElts: function() {
 				if (this.elts.all && this.elts.all.closest('body').length == 0)
 					this.elts.all = this.elts.bg = this.elts.cont = this.elts.hidden = this.elts.load = undefined;
@@ -180,9 +205,17 @@ jQuery(function($, undefined) {
 				this._callFilters('initElts');
 			},
 
+			// Trigger the error
+			// Will call 'error' callback filter
 			_error: function() {
 				this._callFilters('error');
 			},
+
+			// Set the HTML content to show.
+			// - html: HTML content
+			// - selector: selector to filter the content
+			// Will init the size and call the 'size' function.
+			// Will call 'filledContent' callback filter
 			_setCont: function(html, selector) {
 				if (selector) {
 					var tmp = [],
@@ -223,7 +256,8 @@ jQuery(function($, undefined) {
 				this._contentLoading();
 			},
 
-			// Filter an html content to remove the script[src]
+			// Filter an html content to remove the script[src] and store them appropriately if needed
+			// - data: Data to filter
 			_filterScripts: function(data) {
 				if (typeof data != 'string')
 					return data;
@@ -252,6 +286,8 @@ jQuery(function($, undefined) {
 				return data;
 			},
 
+			// Check if the nmObject has a specific filter
+			// - filter: Filter name
 			_hasFilter: function(filter) {
 				var ret = false;
 				$.each(this.filters, function(i, f) {
@@ -259,12 +295,19 @@ jQuery(function($, undefined) {
 				});
 				return ret;
 			},
+
+			// Remove a specific filter
+			// - filter: Filter name
 			_delFilter: function(filter) {
 				this.filters = $.map(this.filters, function(v) {
 					if (v != filter)
 						return v;
 				});
 			},
+
+			// Call a function against all active filters
+			// - fct: Function name
+			// return an array of all return of callbacks; keys are filters name
 			_callFilters: function(fct) {
 				this.getInternal()._debug(fct);
 				var ret = [],
@@ -276,11 +319,21 @@ jQuery(function($, undefined) {
 					this.callbacks[fct](this);
 				return ret;
 			},
+
+			// Call a filter function for a specific filter
+			// - f: Filter name
+			// - fct: Function name
+			// return the return of the callback
 			_callFilter: function(f, fct) {
 				if (_filters[f] && _filters[f][fct] && $.isFunction(_filters[f][fct]))
 					return _filters[f][fct](this);
 				return undefined;
 			},
+
+			// Call animation callback.
+			// Will also call beforeNNN and afterNNN filter callbacks
+			// - fct: Animation function name
+			// - clb: Callback once the animation is done
 			_callAnim: function(fct, clb) {
 				this.getInternal()._debug(fct);
 				this._callFilters('before'+ucfirst(fct));
@@ -298,6 +351,8 @@ jQuery(function($, undefined) {
 				}
 			},
 
+			// Load the content
+			// Will call the 'load' function of the filter specified in the loadFilter parameter
 			_load: function() {
 				this.getInternal()._debug('_load');
 				if (!this.loading && this.loadFilter) {
@@ -305,6 +360,8 @@ jQuery(function($, undefined) {
 					this._callFilter(this.loadFilter, 'load');
 				}
 			},
+
+			// Show the content or the loading according to the current state of the modal
 			_contentLoading: function() {
 				if (!this._animated && this._bgReady) {
 					if (!this._transition && this.elts.cont.html().length > 0)
@@ -361,12 +418,15 @@ jQuery(function($, undefined) {
 					}
 				}
 			},
+
+			// Write the content in the modal.
+			// Content comes from the hidden div, scripts and eventually close button.
 			_writeContent: function() {
 				this.elts.cont
 					.empty()
 					.append(this.elts.hidden.contents())
 					.append(this._scripts)
-					.append(this.closeButton)
+					.append(this.showCloseButton ? this.closeButton : '')
 					.css({
 						position: 'fixed',
 						width: this.sizes.w,
@@ -375,6 +435,8 @@ jQuery(function($, undefined) {
 						left: (this.getInternal().fullSize.viewW - this.sizes.w - this.sizes.wMargin)/2
 					});
 			},
+
+			// Reposition elements with a class nmReposition
 			_reposition: function() {
 				var elts = this.elts.cont.find('.nmReposition');
 				if (elts.length) {
@@ -392,6 +454,9 @@ jQuery(function($, undefined) {
 				}
 				this.elts.cont.css('overflow', 'auto');
 			},
+
+			// Unreposition elements with a class nmReposition
+			// Exaclty the reverse of the _reposition function
 			_unreposition: function() {
 				this.elts.cont.css('overflow', '');
 				var elts = this.elts.all.find('.nmReposition');
@@ -668,6 +733,10 @@ jQuery(function($, undefined) {
 					return true;
 				},
 				init: function(nm) {
+					if (nm.opener.attr('rev') == 'modal')
+						nm.modal = true;
+					if (nm.modal)
+						nm.closeOnEscape = nm.closeOnClick = nm.showCloseButton = false;
 					if (nm.closeOnEscape)
 						nm.useKeyHandler = true;
 				},

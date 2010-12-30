@@ -1,5 +1,5 @@
 /*
- * nyroModal v2.alpha
+ * nyroModal v2.0.0
  * 
  * Form file filter
  * 
@@ -32,7 +32,19 @@ jQuery(function($, undefined) {
 				});
 			},
 			initElts: function(nm) {
-				function rmIframe() {
+				var inputSel;
+				if (nm.store.form.sel)
+					inputSel = $('<input />', {
+						'type': 'hidden',
+						name: nm.selIndicator,
+						value: nm.store.form.sel
+					}).appendTo(nm.opener);
+				function rmFormFileElts() {
+					if (inputSel) {
+						inputSel.remove();
+						inputSel = undefined;
+						delete(inputSel);
+					}
 					nm.store.formFileIframe.attr('src', 'about:blank').remove();
 					nm.store.formFileIframe = undefined;
 					delete(nm.store.formFileIframe);
@@ -46,7 +58,7 @@ jQuery(function($, undefined) {
 									.unbind('load error')
 									.contents().find('body').not('script[src]');
 							if (content && content.html() && content.html().length) {
-								rmIframe();
+								rmFormFileElts();
 								nm._setCont(content.html(), nm.store.form.sel);
 							} else {
 								// Not totally ready, try it in a few secs
@@ -58,11 +70,11 @@ jQuery(function($, undefined) {
 												.contents().find('body').not('script[src]');
 										if (content && content.html() && content.html().length) {
 											nm._setCont(content.html(), nm.store.form.sel);
-											rmIframe();
+											rmFormFileElts();
 										} else if (nbTry < 5) {
 											setTimeout(fct, 25);
 										} else {
-											rmIframe();
+											rmFormFileElts();
 											nm._error();
 										}
 									};

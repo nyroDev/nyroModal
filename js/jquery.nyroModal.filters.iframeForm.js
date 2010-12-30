@@ -1,5 +1,5 @@
 /*
- * nyroModal v2.alpha
+ * nyroModal v2.0.0
  * 
  * Iframe form filter
  * 
