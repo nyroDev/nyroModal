@@ -136,16 +136,18 @@ jQuery(function($, undefined) {
 
 			// Get the nmObject for a new nyroModal
 			getForNewLinks: function() {
-				var ret = $.extend({}, this);
-				ret.filters = [];
-				ret.opener = undefined;
-				ret._open = false;
+				var ret;
 				if (this.stack) {
+					ret = $.extend(true, {}, this);
 					ret._nmOpener = undefined;
 					ret.elts.all = undefined;
 				} else {
+					ret = $.extend({}, this);
 					ret._nmOpener = this;
 				}
+				ret.filters = [];
+				ret.opener = undefined;
+				ret._open = false;
 				return ret;
 			},
 
