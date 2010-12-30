@@ -23,6 +23,8 @@ jQuery(function($, undefined) {
 			showCloseButton: true,	// Indicates if the closeButonn should be added
 			closeButton: '<a href="#" class="nyroModalClose nyroModalCloseButton nmReposition" title="close">Close</a>',	// Close button HTML
 
+			stack: false,	// Indicates if links automatically binded inside the modal should stack or not
+
 			galleryLoop: true,	// Indicates if the gallery should loop
 			galleryCounts: true,	// Indicates if the gallery counts should be shown
 			ltr: true, // Left to Right by default. Put to false for Hebrew or Right to Left language. Used in gallery filter
@@ -138,9 +140,12 @@ jQuery(function($, undefined) {
 				ret.filters = [];
 				ret.opener = undefined;
 				ret._open = false;
-				ret._nmOpener = this;
-				// @todo what to delete or keep here ?
-				// Think about stack or not
+				if (this.stack) {
+					ret._nmOpener = undefined;
+					ret.elts.all = undefined;
+				} else {
+					ret._nmOpener = this;
+				}
 				return ret;
 			},
 
@@ -189,7 +194,7 @@ jQuery(function($, undefined) {
 
 			// Init HTML elements
 			_initElts: function() {
-				if (this.elts.all && this.elts.all.closest('body').length == 0)
+				if (!this.elts.all || this.elts.all.closest('body').length == 0)
 					this.elts.all = this.elts.bg = this.elts.cont = this.elts.hidden = this.elts.load = undefined;
 				if (!this.elts.all)
 					this.elts.all = $('<div />').appendTo(this.getInternal()._container);
