@@ -196,6 +196,8 @@ jQuery(function($, undefined) {
 
 			// Init HTML elements
 			_initElts: function() {
+				if (!this.stack && this.getInternal().stack.length > 1)
+					this.elts = $(_internal.stack[_internal.stack.length-2]).data('nmObj').elts;
 				if (!this.elts.all || this.elts.all.closest('body').length == 0)
 					this.elts.all = this.elts.bg = this.elts.cont = this.elts.hidden = this.elts.load = undefined;
 				if (!this.elts.all)
