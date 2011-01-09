@@ -67,7 +67,7 @@ Note: This code has exaclty the same effect than triggering a nyroModal event li
 
 ###$.nmManual(url, opts);
 This function is used to manually open a nyroModal by giving only an url.
-To use it, *the Link Filter is required*.
+To use it, **the Link Filter is required**.
 Example usage:
     $.nmManual('page.html');
 Parameters: 
