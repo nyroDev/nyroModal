@@ -26,7 +26,7 @@ jQuery(function($, undefined) {
 			load: function(nm) {
 				var data = nm.opener.serializeArray();
 				if (nm.store.form.sel)
-					data.push({name: nm.selIndicator, value: nm.store.form.sel});
+					data.push({name: nm.selIndicator, value: nm.store.form.sel.substring(1)});
 				$.ajax({
 					url: nm.store.form.url,
 					data: data,

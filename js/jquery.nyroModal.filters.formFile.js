@@ -37,7 +37,7 @@ jQuery(function($, undefined) {
 					inputSel = $('<input />', {
 						'type': 'hidden',
 						name: nm.selIndicator,
-						value: nm.store.form.sel
+						value: nm.store.form.sel.substring(1)
 					}).appendTo(nm.opener);
 				function rmFormFileElts() {
 					if (inputSel) {

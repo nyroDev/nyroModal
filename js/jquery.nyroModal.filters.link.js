@@ -26,7 +26,7 @@ jQuery(function($, undefined) {
 			load: function(nm) {
 				$.ajax({
 					url: nm.store.link.url,
-					data: nm.store.link.sel ? {nm.selIndicator: nm.store.link.sel} : undefined,
+					data: nm.store.link.sel ? [{name: nm.selIndicator, value: nm.store.link.sel.substring(1)}] : undefined,
 					success: function(data) {
 						nm._setCont(data, nm.store.link.sel);
 					},
