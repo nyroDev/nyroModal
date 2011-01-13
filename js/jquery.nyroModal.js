@@ -559,9 +559,9 @@ jQuery(function($, undefined) {
 				nm.opener
 					.unbind('nyroModal.nyroModal nmClose.nyroModal nmResize.nyroModal')
 					.bind({
-						'nyroModal.nyroModal': 	function() { nm.open(); },
-						'nmClose.nyroModal': 	function() { nm.close(); },
-						'nmResize.nyroModal': 	function() { nm.resize(); }
+						'nyroModal.nyroModal': 	function(e) { nm.open(); return false;},
+						'nmClose.nyroModal': 	function() { nm.close(); return false;},
+						'nmResize.nyroModal': 	function() { nm.resize(); return false;}
 					});
 			},
 
