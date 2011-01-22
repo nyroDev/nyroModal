@@ -12,7 +12,7 @@ jQuery(function($, undefined) {
 	$.nmFilters({
 		image: {
 			is: function(nm) {
-				return (new RegExp('[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\s*$', 'i')).test(nm.opener.attr('href'));
+				return (new RegExp(nm.imageRegex, 'i')).test(nm.opener.attr('href'));
 			},
 			init: function(nm) {
 				nm.loadFilter = 'image';

@@ -25,9 +25,16 @@ jQuery(function($, undefined) {
 
 			stack: false,	// Indicates if links automatically binded inside the modal should stack or not
 
+			header: undefined,	// header include in every modal
+			footer: undefined,	// footer include in every modal
+			
+			// Specific confirguation for gallery filter
 			galleryLoop: true,	// Indicates if the gallery should loop
 			galleryCounts: true,	// Indicates if the gallery counts should be shown
 			ltr: true, // Left to Right by default. Put to false for Hebrew or Right to Left language. Used in gallery filter
+
+			// Specific confirguation for image filter
+			imageRegex: '[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\s*$',	// Regex used to detect image link
 
 			selIndicator: 'nyroModalSel', // Value added when a form or Ajax is sent with a filter content
 
@@ -255,6 +262,8 @@ jQuery(function($, undefined) {
 				}
 				this.elts.hidden
 					.append(this._filterScripts(html))
+					.prepend(this.header)
+					.append(this.footer)
 					.wrapInner('<div class="nyroModal'+ucfirst(this.loadFilter)+'" />');
 
 				// Store the size of the element
