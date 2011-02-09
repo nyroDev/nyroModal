@@ -33,7 +33,7 @@ jQuery(function($, undefined) {
 				});
 			},
 			load: function(nm) {
-				nm.store.iframeFormIframe = $('<iframe name="nyroModalIframeForm" src="javascript:\'\';"></iframe>');
+				nm.store.iframeFormIframe = $('<iframe name="nyroModalIframeForm" src="javascript:\'\';" id="nyromodal-iframe-'+(new Date().getTime())+'"></iframe>');
 				nm._setCont(nm.store.iframeFormIframe);
 			},
 			afterShowCont: function(nm) {

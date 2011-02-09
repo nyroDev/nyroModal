@@ -49,7 +49,7 @@ jQuery(function($, undefined) {
 					nm.store.formFileIframe = undefined;
 					delete(nm.store.formFileIframe);
 				}
-				nm.store.formFileIframe = $('<iframe name="nyroModalFormFile" src="javascript:\'\';"></iframe>')
+				nm.store.formFileIframe = $('<iframe name="nyroModalFormFile" src="javascript:\'\';" id="nyromodal-iframe-'+(new Date().getTime())+'"></iframe>')
 					.hide()
 					.load(function() {
 						if (nm.store.formFileLoading) {
@@ -83,7 +83,7 @@ jQuery(function($, undefined) {
 						}
 					})
 					.error(function() {
-						rmIframe();
+						rmFormFileElts();
 						nm._error();
 					});
 				nm.elts.all.append(nm.store.formFileIframe);
