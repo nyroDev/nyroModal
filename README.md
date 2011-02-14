@@ -74,6 +74,15 @@ Parameters:
 - url: The url to open. it might a DOM selector or anything else
 - opts: the options parameter might be used in order to change the setting for the specified nyroModal objects
 
+###$.nmData(data, opts);
+This function is used to manually open a nyroModal by giving it's content.
+To use it, **the Link Filter and the Data Filter are required**.
+Example usage:
+    $.nmData('my content<br />is so greaaaaaaaaaaaat !');
+Parameters: 
+- data: The data to be shown inside the modal
+- opts: the options parameter might be used in order to change the setting for the specified nyroModal objects
+
 ###$.nmObj(opts);
 This is used to overwrite the default function or settings of the nyroModal object created when initialising a nyroModal Object.
 This could be used to change the default animations to use or change the default behavior of the nyroModal.
