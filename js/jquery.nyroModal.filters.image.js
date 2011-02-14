@@ -6,7 +6,7 @@
  * Depends:
  * - filters.link
  * 
- * Before: filters.dom
+ * Before: filters.data
  */
 jQuery(function($, undefined) {
 	$.nmFilters({

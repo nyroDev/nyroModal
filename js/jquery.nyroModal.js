@@ -532,6 +532,9 @@ jQuery(function($, undefined) {
 					href: url
 				}).nyroModal(opts).trigger('nyroModal');
 			},
+			nmData: function(data, opts) {
+				this.nmManual('#', $.extend({data: data}, opts));
+			},
 			nmObj: function(opts) {
 				$.extend(true, _nmObj, opts);
 			},
@@ -815,6 +818,7 @@ jQuery(function($, undefined) {
 	// Add global jQuery functions
 	$.extend({
 		nmManual: _internal.nmManual,
+		nmData: _internal.nmData,
 		nmObj: _internal.nmObj,
 		nmInternal: _internal.nmInternal,
 		nmAnims: _internal.nmAnims,
