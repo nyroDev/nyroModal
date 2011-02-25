@@ -190,6 +190,7 @@ All function or callbacks receive the same nyroModal object as a unique paramete
 The list of all function or callback that can be called in a filter:
 
 * is: should return true or false to select the filter for the current or element or not. This function is **REQUIRED** !
+* initFilters: called just after every filters have been determined to use or not, and just before the init of them. Good place to force filters.
 * init: called at the very beggining of the process. This function should bind element or create object needed later
 * initElts: called at the beggining of the open process, juste before the load start. After that, all the needed div are created and attached to the DOM
 * load: called only for ONE filter defined in nm.loadFilter attribute. This function should load the function and set it's content using the **_setCont** function
@@ -214,6 +215,8 @@ Like the version 1, there is a bunch of others callback that you can define befo
 * afterHideLoad: called just after the hideLoad animation
 * beforeShowCont: called just before the showCont animation (also called in case of a transition, before beforeHideTrans)
 * afterShowCont: called just after the showCont animation (also called in case of a transition, after afterHideTrans)
+* afterReposition: called just after the .nmRepositon have been placed
+* afterUnreposition: called just after the .nmRepositon have been replaced on theire initial positions
 * beforeHideCont: called just before the hideCont animation
 * afterHideCont: called just after the hideCont animation
 * beforeShowTrans: called just before the showTrans animation (transition)

@@ -38,6 +38,7 @@ jQuery(function($, undefined) {
 
 			selIndicator: 'nyroModalSel', // Value added when a form or Ajax is sent with a filter content
 
+			swfObjectId: undefined, // Object id for swf object
 			swf:  {	// Default SWF attributes
 				allowFullScreen: 'true',
 				allowscriptaccess: 'always',
@@ -93,6 +94,8 @@ jQuery(function($, undefined) {
 			},
 			// Open the modal
 			open: function() {
+				if (this._nmOpener)
+					this._nmOpener._close();
 				this.getInternal()._pushStack(this.opener);
 				this._opened = false;
 				this._bgReady = false;
@@ -104,7 +107,6 @@ jQuery(function($, undefined) {
 					this._bgReady = true;
 					if (this._nmOpener) {
 						// fake closing of the opener nyroModal
-						this._nmOpener._close();
 						this._nmOpener._bgReady = false;
 						this._nmOpener._loading = false;
 						this._nmOpener._animated = false;
@@ -120,9 +122,17 @@ jQuery(function($, undefined) {
 
 			// Resize the modal according to sizes.initW and sizes.initH
 			// Will call size function
-			resize: function() {
-				this.sizes.w = this.sizes.initW;
-				this.sizes.h = this.sizes.initH;
+			// @param recalc boolean: Indicate if the size should be recalaculated (useful when content has changed)
+			resize: function(recalc) {
+				if (recalc) {
+					this.elts.hidden.append(this.elts.cont.children().first().clone());
+					this.sizes.initW = this.sizes.w = this.elts.hidden.width();
+					this.sizes.initH = this.sizes.h = this.elts.hidden.height();
+					this.elts.hidden.empty();
+				} else {
+					this.sizes.w = this.sizes.initW;
+					this.sizes.h = this.sizes.initH;
+				}
 				this._unreposition();
 				this.size();
 				this._callAnim('resize', $.proxy(function() {
@@ -400,9 +410,9 @@ jQuery(function($, undefined) {
 									this._callFilters('beforeShowCont');
 									this._callAnim('hideTrans', $.proxy(function() {
 										this._transition = false;
+										this._callFilters('afterShowCont');
 										this.elts.cont.append(this._scriptsShown);
 										this._reposition();
-										this._callFilters('afterShowCont');
 									}, this));
 								}, this);
 								if (this._nbContentLoading == 1) {
@@ -477,6 +487,7 @@ jQuery(function($, undefined) {
 					this.elts.cont.after(elts);
 				}
 				this.elts.cont.css('overflow', 'auto');
+				this._callFilters('afterReposition');
 			},
 
 			// Unreposition elements with a class nmReposition
@@ -486,6 +497,7 @@ jQuery(function($, undefined) {
 				var elts = this.elts.all.find('.nmReposition');
 				if (elts.length)
 					this.elts.cont.append(elts.removeAttr('style'));
+				this._callFilters('afterUnreposition');
 			}
 		},
 		_internal = {
@@ -563,10 +575,11 @@ jQuery(function($, undefined) {
 			_init: function(nm) {
 				nm.filters = [];
 				$.each(_filters, function(f, obj) {
-					if ($.isFunction(obj.is) && obj.is(nm)) {
+					if (obj.is && $.isFunction(obj.is) && obj.is(nm)) {
 						nm.filters.push(f);
 					}
 				});
+				nm._callFilters('initFilters');
 				nm._callFilters('init');
 				nm.opener
 					.unbind('nyroModal.nyroModal nmClose.nyroModal nmResize.nyroModal')

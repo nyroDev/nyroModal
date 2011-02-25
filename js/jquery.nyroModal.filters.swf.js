@@ -11,15 +11,18 @@
 jQuery(function($, undefined) {
 	$.nmFilters({
 		swf: {
+			idCounter: 1,
 			is: function(nm) {
-				return nm._hasFilter('link') && nm.opener.is('[href$=.swf]');
+				return nm._hasFilter('link') && nm.opener.is('[href$=".swf"]');
 			},
 			init: function(nm) {
 				nm.loadFilter = 'swf';
 			},
 			load: function(nm) {
+				if (!nm.swfObjectId)
+					nm.swfObjectId = 'nyroModalSwf-'+(this.idCounter++);
 				var url = nm.store.link.url,
-					cont = '<div><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="'+nm.sizes.w+'" height="'+nm.sizes.h+'"><param name="movie" value="'+url+'"></param>',
+					cont = '<div><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" id="'+nm.swfObjectId+'" width="'+nm.sizes.w+'" height="'+nm.sizes.h+'"><param name="movie" value="'+url+'"></param>',
 					tmp = '';
 				$.each(nm.swf, function(name, val) {
 					cont+= '<param name="'+name+'" value="'+val+'"></param>';
