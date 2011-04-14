@@ -220,7 +220,7 @@ jQuery(function($, undefined) {
 			// Init HTML elements
 			_initElts: function() {
 				if (!this.stack && this.getInternal().stack.length > 1)
-					this.elts = $(_internal.stack[_internal.stack.length-2]).data('nmObj').elts;
+					this.elts = this.getInternal().stack[this.getInternal().stack.length-2]['nmObj'].elts;
 				if (!this.elts.all || this.elts.all.closest('body').length == 0)
 					this.elts.all = this.elts.bg = this.elts.cont = this.elts.hidden = this.elts.load = undefined;
 				if (!this.elts.all)
@@ -540,9 +540,7 @@ jQuery(function($, undefined) {
 			},
 
 			nmManual: function(url, opts) {
-				$('<a />', {
-					href: url
-				}).nyroModal(opts).trigger('nyroModal');
+				$('<a href="'+url+'"></a>').nyroModal(opts).trigger('nyroModal');
 			},
 			nmData: function(data, opts) {
 				this.nmManual('#', $.extend({data: data}, opts));
@@ -561,7 +559,7 @@ jQuery(function($, undefined) {
 			},
 			nmTop: function() {
 				if (_internal.stack.length)
-					return $(_internal.stack[_internal.stack.length-1]).data('nmObj');
+					return _internal.stack[_internal.stack.length-1]['nmObj'];
 				return undefined;
 			},
 
@@ -627,14 +625,17 @@ jQuery(function($, undefined) {
 			},
 			_pushStack: function(obj) {
 				this.stack = $.map(this.stack, function(elA) {
-					if (elA != obj.get(0))
+					if (elA['nmOpener'] != obj.get(0))
 						return elA;
 				});
-				this.stack.push(obj.get(0));
+				this.stack.push({
+					nmOpener: obj.get(0),
+					nmObj: $(obj).data('nmObj')
+				});
 			},
 			_removeStack: function(obj) {
 				this.stack = $.map(this.stack, function(elA) {
-					if (elA != obj.get(0))
+					if (elA['nmOpener'] != obj.get(0))
 						return elA;
 				});
 			},

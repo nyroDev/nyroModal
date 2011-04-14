@@ -216,7 +216,7 @@ Like the version 1, there is a bunch of others callback that you can define befo
 * beforeShowCont: called just before the showCont animation (also called in case of a transition, before beforeHideTrans)
 * afterShowCont: called just after the showCont animation (also called in case of a transition, after afterHideTrans)
 * afterReposition: called just after the .nmRepositon have been placed
-* afterUnreposition: called just after the .nmRepositon have been replaced on theire initial positions
+* afterUnreposition: called just after the .nmRepositon have been replaced on their initial positions
 * beforeHideCont: called just before the hideCont animation
 * afterHideCont: called just after the hideCont animation
 * beforeShowTrans: called just before the showTrans animation (transition)

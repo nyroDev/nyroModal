@@ -13,8 +13,16 @@ jQuery(function($, undefined) {
 		gallery: {
 			is: function(nm) {
 				var ret = nm.opener.is('[rel]:not([rel=external], [rel=nofollow])');
-				if (ret && nm.galleryCounts && !nm._hasFilter('title'))
-					nm.filters.push('title');
+				if (ret) {
+					var rel = nm.opener.attr('rel'),
+						indexSpace = rel.indexOf(' '),
+						gal = indexSpace > 0 ? rel.substr(0, indexSpace) : rel
+						links = $('[href][rel="'+gal+'"], [href][rel^="'+gal+' "]');
+					if (links.length < 2)
+						ret = false;
+					if (ret && nm.galleryCounts && !nm._hasFilter('title'))
+						nm.filters.push('title');
+				}
 				return ret;
 			},
 			init: function(nm) {
@@ -40,7 +48,7 @@ jQuery(function($, undefined) {
 				nm.store.galleryIndex = nm.store.galleryLinks.index(nm.opener);
 			},
 			beforeShowCont: function(nm) {
-				if (nm.galleryCounts && nm.store.title && nm.store.galleryLinks.length > 1) {
+				if (nm.galleryCounts && nm.store.title && nm.store.galleryLinks && nm.store.galleryLinks.length > 1) {
 					var curTitle = nm.store.title.html();
 					nm.store.title.html((curTitle.length ? curTitle+' - ' : '')+(nm.store.galleryIndex+1)+'/'+nm.store.galleryLinks.length);
 				}
@@ -95,9 +103,9 @@ jQuery(function($, undefined) {
 					if (!nm.ltr)
 						dir *= -1;
 					var index = nm.store.galleryIndex + dir;
-					if (index >= 0 && index < nm.store.galleryLinks.length)
+					if (nm.store.galleryLinks && index >= 0 && index < nm.store.galleryLinks.length)
 						return nm.store.galleryLinks.eq(index);
-					else if (nm.galleryLoop)
+					else if (nm.galleryLoop && nm.store.galleryLinks)
 						return nm.store.galleryLinks.eq(index<0 ? nm.store.galleryLinks.length-1 : 0);
 				}
 				return undefined;
