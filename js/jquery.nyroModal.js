@@ -502,6 +502,7 @@ jQuery(function($, undefined) {
 		},
 		_internal = {
 			firstInit: true,
+			debug: false,
 			stack: [],
 			fullSize: {
 				w: 0,
@@ -564,7 +565,7 @@ jQuery(function($, undefined) {
 			},
 
 			_debug: function(msg) {
-				if (window.console && window.console.log)
+				if (this.debug && window.console && window.console.log)
 					window.console.log(msg);
 			},
 

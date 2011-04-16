@@ -249,3 +249,16 @@ Here is a list of the filters officially provided:
 * Embedly: Used to show a bunch of different element using [embedly API](http://embed.ly/) ([Examples](http://nyromodal.nyrodev.com/v2/embedly.php)) (depends on link)
 
 ##Animations
+
+
+##Debug
+In order to enable the debug mode, you should change the debug value of the internal object. You can do it like:
+    $.nmInternal({debug: true});
+
+By default, the debug function show function name in the console. If you want do something else, you should overwrite the _debug function like:
+    $.nmInternal({
+      _debug: function(msg) {
+        if (this.debug && window.console && window.console.log)
+          window.console.log(msg);
+      }
+    });
