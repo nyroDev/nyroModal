@@ -16,7 +16,7 @@ jQuery(function($, undefined) {
 				if (ret) {
 					var rel = nm.opener.attr('rel'),
 						indexSpace = rel.indexOf(' '),
-						gal = indexSpace > 0 ? rel.substr(0, indexSpace) : rel
+						gal = indexSpace > 0 ? rel.substr(0, indexSpace) : rel,
 						links = $('[href][rel="'+gal+'"], [href][rel^="'+gal+' "]');
 					if (links.length < 2)
 						ret = false;
