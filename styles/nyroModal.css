@@ -58,6 +58,9 @@
 	position: relative;
 	overflow: hidden;
 }
+.nyroModalImage img {
+    vertical-align: top;
+}
 .nyroModalHidden {
 	left: -9999em;
 	top: -9999em;
