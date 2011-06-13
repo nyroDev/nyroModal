@@ -24,6 +24,7 @@ jQuery(function($, undefined) {
 			closeButton: '<a href="#" class="nyroModalClose nyroModalCloseButton nmReposition" title="close">Close</a>',	// Close button HTML
 
 			stack: false,	// Indicates if links automatically binded inside the modal should stack or not
+			nonStackable: 'form',	// Filter to not stack DOM element
 
 			header: undefined,	// header include in every modal
 			footer: undefined,	// footer include in every modal
@@ -158,9 +159,9 @@ jQuery(function($, undefined) {
 			},
 
 			// Get the nmObject for a new nyroModal
-			getForNewLinks: function() {
+			getForNewLinks: function(elt) {
 				var ret;
-				if (this.stack) {
+				if (this.stack && (!elt || this.isStackable(elt))) {
 					ret = $.extend(true, {}, this);
 					ret._nmOpener = undefined;
 					ret.elts.all = undefined;
@@ -172,6 +173,11 @@ jQuery(function($, undefined) {
 				ret.opener = undefined;
 				ret._open = false;
 				return ret;
+			},
+			
+			// Indicate if an element can be stackable or not, regarding the nonStackable setting
+			isStackable: function(elt) {
+				return !elt.is(this.nonStackable);
 			},
 
 			// key handle function.
@@ -800,7 +806,10 @@ jQuery(function($, undefined) {
 				},
 				beforeShowCont: function(nm) {
 					nm.elts.cont
-						.find('.nyroModal').nyroModal(nm.getForNewLinks(), true).end()
+						.find('.nyroModal').each(function() {
+							var cur = $(this);
+							cur.nyroModal(nm.getForNewLinks(cur), true);
+						}).end()
 						.find('.nyroModalClose').bind('click.nyroModal', function(e) {
 							e.preventDefault();
 							nm.close();
