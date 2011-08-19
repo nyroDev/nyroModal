@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
+    <script type="text/javascript" src="../js/jquery.nyroModal.js" ></script>
+    <script type="text/javascript" src="../js/jquery.nyroModal.filters.link.js" ></script>
+    <script type="text/javascript" src="../js/jquery.nyroModal.filters.embedly.js" ></script>
+    <link rel="stylesheet" href="../styles/nyroModal.css" type="text/css" media="screen" />
+  </head>
+  <body>
+    <ul>
+      <li><a href="http://vimeo.com/18150336">Vimeo</a></li>
+      <li><a href="http://www.rdio.com/artist/BT/album/The_Emergency/track/The_Emergency_(Dragon,_Jontron,_Manufactured_Superstars_Remix)/">Rdio</a></li>
+      <li><a href="http://www.flickr.com/photos/whitehouse/6059380700/">Flickr</a></li>
+      <li><a href="http://www.hulu.com/watch/110339/family-guy-table-talk-football">Hulu</a></li>
+      <li><a href="http://www.youtube.com/watch?v=LCl5uyn5K7k">YouTube</a></li>
+    </ul>
+  <script>
+  $(document).ready(function(){
+    $('a').nm({embedly: {autoplay:true,
+                         maxwidth:500,
+                         key : 'Add Your Key Here'}});
+    });
+  </script>
+  </body>
+</html>

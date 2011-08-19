@@ -77,7 +77,15 @@ jQuery(function($, undefined) {
 				hideTrans: undefined,	// Set to use for hideTrans animation
 				resize: undefined		// Set to use for resize animation
 			},
-
+			embedly : { //arguments that can be sent to the Embedly API: http://embed.ly/docs/endpoints/arguments
+			  key : undefined, //API Key. Sign up for a free one at http://embed.ly/pricing
+			  wmode : 'transparent', //wmode: http://kb2.adobe.com/cps/127/tn_12701.html
+			  maxwidth : undefined, // Maximun width of an embed Embedly should return.
+			  maxheight : undefined, // Maximun height of an embed Embedly should return.
+			  autoplay : undefined, // Autoplay the video as soon as it's opened.
+			  urlRegex : undefined // Play only videos that match this regex
+			},
+			
 			_open: false,	// Indicates if the modal is open
 			_bgReady: false,	// Indicates if the background is ready
 			_opened: false,	// Indicates if the modal was opened (useful for stacking)
