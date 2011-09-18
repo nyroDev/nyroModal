@@ -23,7 +23,7 @@ jQuery(function($, undefined) {
 				nm.loadFilter = 'iframe';
 			},
 			load: function(nm) {
-				nm.store.iframe = $('<iframe src="javascript:\'\';" id="nyromodal-iframe-'+(new Date().getTime())+'"></iframe>');
+				nm.store.iframe = $('<iframe src="javascript:\'\';" id="nyromodal-iframe-'+(new Date().getTime())+'" frameborder="0"></iframe>');
 				nm._setCont(nm.store.iframe);
 			},
 			afterShowCont: function(nm) {
