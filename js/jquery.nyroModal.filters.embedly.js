@@ -26,7 +26,7 @@ jQuery(function($, undefined) {
 			words: 50,
 			chars: 100
 			*/
-		},
+		}
 	});
 	var cache = [];
 	$.nmFilters({

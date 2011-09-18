@@ -246,7 +246,7 @@ Here is a list of the filters officially provided:
 * Form file: Same as Form but used when form should send file
 * Iframe: Used to show data from an other domain name or when target="_blank" is present (depends on link)
 * Iframe form: Used to open a form in an iframe (depends iframe)
-* Embedly: Used to show a bunch of different element using [embedly API](http://embed.ly/) ([Examples](http://nyromodal.nyrodev.com/v2/embedly.php)) (depends on link)
+* Embedly: Used to show a bunch of different element using [embedly API](http://embed.ly/) ([Examples](http://nyromodal.nyrodev.com/embedly.php)) (depends on link) Embedly requires developers to sign up for an API key at [embedly Pricing](http://embed.ly/pricing)
 
 ##Animations
 
