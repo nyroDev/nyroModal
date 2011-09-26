@@ -10,6 +10,7 @@
  */
 jQuery(function($, undefined) {
 	$.nmObj({
+		embedlyUrl: 'http://api.embed.ly/1/oembed',
 		embedly: {
 			key: undefined,
 			wmode: 'transparent',
@@ -42,7 +43,7 @@ jQuery(function($, undefined) {
 					var data = nm.embedly;
 					data.url = nm.opener.attr('href');
 					$.ajax({
-						url: 'http://api.embed.ly/1/oembed',
+						url: nm.embedlyUrl,
 						dataType: 'jsonp',
 						data: data,
 						success: function(data) {
