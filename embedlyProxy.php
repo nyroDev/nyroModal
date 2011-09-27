@@ -49,6 +49,7 @@ $params = $_GET;
 
 $clb = $params['callback'];
 unset($params['callback']);
+unset($params['_']);
 
 $fileCache = $cacheDir.DIRECTORY_SEPARATOR.md5(serialize($params)).'.json';
 if (!file_exists($fileCache)) {
