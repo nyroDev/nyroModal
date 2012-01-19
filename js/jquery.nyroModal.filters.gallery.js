@@ -62,7 +62,7 @@ jQuery(function($, undefined) {
 							href: '#'
 						})
 						.addClass('nyroModalPrev')
-						.bind('click', function(e) {
+						.on('click', function(e) {
 							e.preventDefault();
 							nm._callFilters('galleryPrev');
 						})
@@ -75,7 +75,7 @@ jQuery(function($, undefined) {
 							href: '#'
 						})
 						.addClass('nyroModalNext')
-						.bind('click', function(e) {
+						.on('click', function(e) {
 							e.preventDefault();
 							nm._callFilters('galleryNext');
 						})

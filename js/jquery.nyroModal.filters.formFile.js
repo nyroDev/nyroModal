@@ -22,7 +22,7 @@ jQuery(function($, undefined) {
 			init: function(nm) {
 				nm.loadFilter = 'formFile';
 				nm.store.formFileLoading = false;
-				nm.opener.unbind('submit.nyroModal').bind('submit.nyroModal', function(e) {
+				nm.opener.off('submit.nyroModal').on('submit.nyroModal', function(e) {
 					if (!nm.store.formFileIframe) {
 						e.preventDefault();
 						nm.opener.trigger('nyroModal');
@@ -55,7 +55,7 @@ jQuery(function($, undefined) {
 						if (nm.store.formFileLoading) {
 							nm.store.formFileLoading = false;
 							var content = nm.store.formFileIframe
-									.unbind('load error')
+									.off('load error')
 									.contents().find('body').not('script[src]');
 							if (content && content.html() && content.html().length) {
 								rmFormFileElts();
@@ -66,7 +66,7 @@ jQuery(function($, undefined) {
 									fct = function() {
 										nbTry++;
 										var content = nm.store.formFileIframe
-												.unbind('load error')
+												.off('load error')
 												.contents().find('body').not('script[src]');
 										if (content && content.html() && content.html().length) {
 											nm._setCont(content.html(), nm.store.form.sel);

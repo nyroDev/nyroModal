@@ -18,7 +18,7 @@ jQuery(function($, undefined) {
 			},
 			init: function(nm) {
 				nm.loadFilter = 'form';
-				nm.opener.unbind('submit.nyroModal').bind('submit.nyroModal', function(e) {
+				nm.opener.off('submit.nyroModal').on('submit.nyroModal', function(e) {
 					e.preventDefault();
 					nm.opener.trigger('nyroModal');
 				});

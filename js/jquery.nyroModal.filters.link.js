@@ -18,7 +18,7 @@ jQuery(function($, undefined) {
 			},
 			init: function(nm) {
 				nm.loadFilter = 'link';
-				nm.opener.unbind('click.nyroModal').bind('click.nyroModal', function(e) {
+				nm.opener.off('click.nyroModal').on('click.nyroModal', function(e) {
 					e.preventDefault();
 					nm.opener.trigger('nyroModal');
 				});

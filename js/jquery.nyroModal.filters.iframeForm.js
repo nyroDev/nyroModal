@@ -23,7 +23,7 @@ jQuery(function($, undefined) {
 				nm.loadFilter = 'iframeForm';
 				nm.store.iframeFormLoading = false;
 				nm.store.iframeFormOrgTarget = nm.opener.attr('target');
-				nm.opener.unbind('submit.nyroModal').bind('submit.nyroModal', function(e) {
+				nm.opener.off('submit.nyroModal').on('submit.nyroModal', function(e) {
 					if (!nm.store.iframeFormIframe) {
 						e.preventDefault();
 						nm.opener.trigger('nyroModal');
