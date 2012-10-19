@@ -664,7 +664,7 @@ jQuery(function($, undefined) {
 				this.fullSize.viewH = Math.min(this.fullSize.h, this.fullSize.wH);
 			},
 			_getCurCSS: function(elm, name) {
-				var ret = parseInt($.curCSS(elm, name, true));
+				var ret = parseInt($.css(elm, name, true));
 				return isNaN(ret) ? 0 : ret;
 			},
 			_getOuter: function(elm) {
