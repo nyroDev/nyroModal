@@ -13,6 +13,7 @@ jQuery(function($, undefined) {
 		_nmObj = {
 			filters: [],	// List of filters used
 			callbacks: {},	// Sepcific callbacks
+			anims: {},	// Sepcific animations functions
 			loadFilter: undefined,	// Name of the filter used for loading
 
 			modal: false,	// Indicates if it's a modal window or not
@@ -35,7 +36,7 @@ jQuery(function($, undefined) {
 			ltr: true, // Left to Right by default. Put to false for Hebrew or Right to Left language. Used in gallery filter
 
 			// Specific confirguation for DOM filter
-			domCopy: false,
+			domCopy: false, // Indicates if DOM element should be copied or moved
 			
 			// Specific confirguation for image filter
 			imageRegex: '[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\s*$',	// Regex used to detect image link
@@ -383,10 +384,15 @@ jQuery(function($, undefined) {
 				if (!this._animated) {
 					this._animated = true;
 					if (!$.isFunction(clb)) clb = $.noop;
-					var set = this.anim[fct] || this.anim.def || 'basic';
-					if (!_animations[set] || !_animations[set][fct] || !$.isFunction(_animations[set][fct]))
-						set = 'basic';
-					_animations[set][fct](this, $.proxy(function() {
+					if (this.anims[fct] && $.isFunction(this.anims[fct])) {
+						curFct = this.anims[fct];
+					} else {
+						var set = this.anim[fct] || this.anim.def || 'basic';
+						if (!_animations[set] || !_animations[set][fct] || !$.isFunction(_animations[set][fct]))
+							set = 'basic';
+						curFct = _animations[set][fct];
+					}
+					curFct(this, $.proxy(function() {
 							this._animated = false;
 							this._callFilters('after'+ucfirst(fct));
 							clb();
