@@ -226,6 +226,16 @@ jQuery(function($, undefined) {
 					});
 				});
 			},
+			
+			// Public function for destroying a nyroModal instance, only for non open modal
+			destroy: function() {
+				if (this._open)
+					return false;
+				this._callFilters('destroy');
+				if (this.elts.all)
+					this.elts.all.remove();
+				return true;
+			},
 
 			// Init HTML elements
 			_initElts: function() {
@@ -553,6 +563,15 @@ jQuery(function($, undefined) {
 								: $.extend(true, {opener: me}, _nmObj, opts));
 				});
 			},
+			nmDestroy: function() {
+				return this.each(function() {
+					var me = $(this);
+					if (me.data('nmObj')) {
+						if (me.data('nmObj').destroy())
+							me.removeData('nmObj');
+					}
+				});
+			},
 			nmCall: function() {
 				return this.trigger('nyroModal');
 			},
@@ -847,6 +866,7 @@ jQuery(function($, undefined) {
 		nm: _internal.nyroModal,
 		nyroModal: _internal.nyroModal,
 		nmInit: _internal.nmInit,
+		nmDestroy: _internal.nmDestroy,
 		nmCall: _internal.nmCall
 	});
 

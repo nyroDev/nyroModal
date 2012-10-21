@@ -44,6 +44,9 @@ jQuery(function($, undefined) {
 				});
 
 				$.ajax(ajax);
+			},
+			destroy: function(nm) {
+				nm.opener.off('submit.nyroModal');
 			}
 		}
 	});

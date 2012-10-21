@@ -56,6 +56,9 @@ jQuery(function($, undefined) {
 					nm.store.iframeFormIframe = undefined;
 					delete(nm.store.iframeFormIframe);
 				}
+			},
+			destroy: function(nm) {
+				nm.opener.off('submit.nyroModal')
 			}
 		}
 	});

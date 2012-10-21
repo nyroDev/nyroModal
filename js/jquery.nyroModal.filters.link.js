@@ -35,6 +35,9 @@ jQuery(function($, undefined) {
 						}
 					});
 				$.ajax(ajax);
+			},
+			destroy: function(nm) {
+				nm.opener.off('click.nyroModal');
 			}
 		}
 	});
