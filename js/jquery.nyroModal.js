@@ -280,7 +280,7 @@ jQuery(function($, undefined) {
 					.append(this._filterScripts(html))
 					.prepend(this.header)
 					.append(this.footer)
-					.wrapInner('<div class="nyroModal'+ucfirst(this.loadFilter)+'" />');
+					.wrapInner($('<div />', {'class': 'nyroModal'+ucfirst(this.loadFilter)}));
 
 				// Store the size of the element
 				this.sizes.initW = this.sizes.w = this.elts.hidden.width();
@@ -547,7 +547,7 @@ jQuery(function($, undefined) {
 			},
 
 			nmManual: function(url, opts) {
-				$('<a href="'+url+'"></a>').nyroModal(opts).trigger('nyroModal');
+				$('<a />', {href: url}).nyroModal(opts).trigger('nyroModal');
 			},
 			nmData: function(data, opts) {
 				this.nmManual('#', $.extend({data: data}, opts));
@@ -589,7 +589,7 @@ jQuery(function($, undefined) {
 				nm.opener
 					.off('nyroModal.nyroModal nmClose.nyroModal nmResize.nyroModal')
 					.on({
-						'nyroModal.nyroModal': 	function(e) { nm.open(); return false;},
+						'nyroModal.nyroModal': 	function() { nm.open(); return false;},
 						'nmClose.nyroModal': 	function() { nm.close(); return false;},
 						'nmResize.nyroModal': 	function() { nm.resize(); return false;}
 					});

@@ -34,7 +34,6 @@ jQuery(function($, undefined) {
 							nm._error();
 						}
 					});
-
 				$.ajax(ajax);
 			}
 		}

@@ -13,9 +13,8 @@ jQuery(function($, undefined) {
 		data: {
 			is: function(nm) {
 				var ret = nm.data ? true : false;
-				if (ret) {
+				if (ret)
 					nm._delFilter('dom');
-				}
 				return ret;
 			},
 			init: function(nm) {

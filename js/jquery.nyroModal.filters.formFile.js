@@ -34,8 +34,7 @@ jQuery(function($, undefined) {
 			initElts: function(nm) {
 				var inputSel;
 				if (nm.store.form.sel)
-					inputSel = $('<input />', {
-						'type': 'hidden',
+					inputSel = $('<input type="hidden" />', {
 						name: nm.selIndicator,
 						value: nm.store.form.sel.substring(1)
 					}).appendTo(nm.opener);
@@ -49,7 +48,13 @@ jQuery(function($, undefined) {
 					nm.store.formFileIframe = undefined;
 					delete(nm.store.formFileIframe);
 				}
-				nm.store.formFileIframe = $('<iframe name="nyroModalFormFile" src="javascript:\'\';" id="nyromodal-iframe-'+(new Date().getTime())+'"></iframe>')
+				nm.store.formFileIframe = $('<iframe />')
+					.attr({
+						name: 'nyroModalFormFile',
+						src: 'javascript:\'\';',
+						id: 'nyromodal-iframe-'+(new Date().getTime()),
+						frameborder: '0'
+					})
 					.hide()
 					.load(function() {
 						if (nm.store.formFileLoading) {
@@ -62,7 +67,7 @@ jQuery(function($, undefined) {
 								nm._setCont(content.html(), nm.store.form.sel);
 							} else {
 								// Not totally ready, try it in a few secs
-								var nbTry = 0;
+								var nbTry = 0,
 									fct = function() {
 										nbTry++;
 										var content = nm.store.formFileIframe

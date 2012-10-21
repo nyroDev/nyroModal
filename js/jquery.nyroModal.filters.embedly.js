@@ -47,7 +47,7 @@ jQuery(function($, undefined) {
 						dataType: 'jsonp',
 						data: data,
 						success: function(data) {
-							if (data.type != 'error') {
+							if (data.type != 'error' && data.html) {
 								nm.store.embedly = data;
 								cache[nm.opener.attr('href')] = data;
 								nm._delFilter('iframe');
