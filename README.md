@@ -12,6 +12,9 @@ Tested in all majors browsers:
 - Internet Explorer 7 (Windows)
 - Internet Explorer 6 (Windows)
 
+##License
+
+nyroModal is licensed under the MIT License.
 
 ##How to use it
 
