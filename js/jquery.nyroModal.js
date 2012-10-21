@@ -440,6 +440,7 @@ jQuery(function($, undefined) {
 										this._callFilters('afterShowCont');
 										this.elts.cont.append(this._scriptsShown);
 										this._reposition();
+										this.elts.cont.scrollTop(0);
 									}, this));
 								}, this);
 								if (this._nbContentLoading == 1) {
@@ -454,6 +455,7 @@ jQuery(function($, undefined) {
 									this._callAnim('showCont', $.proxy(function() {
 										this.elts.cont.append(this._scriptsShown);
 										this._reposition();
+										this.elts.cont.scrollTop(0);
 									}, this));
 								}, this));
 							}
