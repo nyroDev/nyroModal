@@ -34,6 +34,9 @@ jQuery(function($, undefined) {
 			galleryCounts: true,	// Indicates if the gallery counts should be shown
 			ltr: true, // Left to Right by default. Put to false for Hebrew or Right to Left language. Used in gallery filter
 
+			// Specific confirguation for DOM filter
+			domCopy: false,
+			
 			// Specific confirguation for image filter
 			imageRegex: '[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\s*$',	// Regex used to detect image link
 

@@ -20,12 +20,12 @@ jQuery(function($, undefined) {
 			load: function(nm) {
 				nm.store.domEl = $(nm.store.link.sel);
 				if (nm.store.domEl.length)
-					nm._setCont(nm.store.domEl.contents());
+					nm._setCont(nm.domCopy ? nm.store.domEl.html() : nm.store.domEl.contents());
 				else
 					nm._error();
 			},
 			close: function(nm) {
-				if (nm.store.domEl && nm.elts.cont)
+				if (!nm.domCopy && nm.store.domEl && nm.elts.cont)
 					nm.store.domEl.append(nm.elts.cont.find('.nyroModalDom').contents());
 			}
 		}
