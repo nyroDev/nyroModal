@@ -38,8 +38,8 @@ jQuery(function($, undefined) {
 					success: function(data) {
 						nm._setCont(data, nm.store.form.sel);
 					},
-					error: function() {
-						nm._error();
+					error: function(jqXHR) {
+						nm._error(jqXHR);
 					}
 				});
 

@@ -249,8 +249,8 @@ jQuery(function($, undefined) {
 
 			// Trigger the error
 			// Will call 'error' callback filter
-			_error: function() {
-				this._callFilters('error');
+			_error: function(jqXHR) {
+				this._callFilters('error', jqXHR);
 			},
 
 			// Set the HTML content to show.
@@ -351,26 +351,28 @@ jQuery(function($, undefined) {
 
 			// Call a function against all active filters
 			// - fct: Function name
+			// - prm: Parameter to be used in callback
 			// return an array of all return of callbacks; keys are filters name
-			_callFilters: function(fct) {
+			_callFilters: function(fct, prm) {
 				this.getInternal()._debug(fct);
 				var ret = [],
 					self = this;
 				$.each(this.filters, function(i, f) {
-					ret[f] = self._callFilter(f, fct);
+					ret[f] = self._callFilter(f, fct, prm);
 				});
 				if (this.callbacks[fct] && $.isFunction(this.callbacks[fct]))
-					this.callbacks[fct](this);
+					this.callbacks[fct](this, prm);
 				return ret;
 			},
 
 			// Call a filter function for a specific filter
 			// - f: Filter name
 			// - fct: Function name
+			// - prm: Parameter to be used in callback
 			// return the return of the callback
-			_callFilter: function(f, fct) {
+			_callFilter: function(f, fct, prm) {
 				if (_filters[f] && _filters[f][fct] && $.isFunction(_filters[f][fct]))
-					return _filters[f][fct](this);
+					return _filters[f][fct](this, prm);
 				return undefined;
 			},
 
