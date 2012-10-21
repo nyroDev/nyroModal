@@ -272,7 +272,7 @@ jQuery(function($, undefined) {
 					var cur = $('<div>'+html+'</div>').find(selector);
 					if (cur.length) {
 						html = cur.html()
-							.replace(/<pre class="?nyroModalScript"? rel="?(.?)"?><\/pre>/gi, function(x, y, z) { return tmp[y]; })
+							.replace(/<pre class="?nyroModalScript"? rel="?([0-9]*)"?><\/pre>/gi, function(x, y, z) { return tmp[y]; })
 							.replace(/nyroModalLN/gi, "\r\n");
 					} else {
 						// selector not found
