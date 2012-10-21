@@ -38,6 +38,9 @@ jQuery(function($, undefined) {
 			// Specific confirguation for DOM filter
 			domCopy: false, // Indicates if DOM element should be copied or moved
 			
+			// Specific confirguation for link and form filters
+			ajax: {}, // Ajax options to be used in link and form filter
+			
 			// Specific confirguation for image filter
 			imageRegex: '[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\s*$',	// Regex used to detect image link
 

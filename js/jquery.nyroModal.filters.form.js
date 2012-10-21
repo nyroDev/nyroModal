@@ -25,13 +25,12 @@ jQuery(function($, undefined) {
 			},
 			load: function(nm) {
 				var data = {};
-				$.map(nm.opener.serializeArray(), function(d){
+				$.map(nm.opener.serializeArray(), function(d) {
 					data[d.name] = d.value;
 				});
 				if (nm.store.form.sel)
 					data[nm.selIndicator] = nm.store.form.sel.substring(1);
-
-				var ajax = $.extend(true, { type : 'get', dataType : 'text' }, nm.ajax || {}, {
+				$.ajax($.extend(true, { type : 'get', dataType : 'text' }, nm.ajax || {}, {
 					url: nm.store.form.url,
 					data: data,
 					type: nm.opener.attr('method') ? nm.opener.attr('method') : undefined,
@@ -41,9 +40,7 @@ jQuery(function($, undefined) {
 					error: function(jqXHR) {
 						nm._error(jqXHR);
 					}
-				});
-
-				$.ajax(ajax);
+				}));
 			},
 			destroy: function(nm) {
 				nm.opener.off('submit.nyroModal');

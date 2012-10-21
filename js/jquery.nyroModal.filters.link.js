@@ -24,17 +24,16 @@ jQuery(function($, undefined) {
 				});
 			},
 			load: function(nm) {
-				var ajax = $.extend(true, {}, nm.ajax || {}, {
-						url: nm.store.link.url,
-						data: nm.store.link.sel ? [{name: nm.selIndicator, value: nm.store.link.sel.substring(1)}] : undefined,
-						success: function(data) {
-							nm._setCont(data, nm.store.link.sel);
-						},
-						error: function(jqXHR) {
-							nm._error(jqXHR);
-						}
-					});
-				$.ajax(ajax);
+				$.ajax($.extend(true, {}, nm.ajax || {}, {
+					url: nm.store.link.url,
+					data: nm.store.link.sel ? [{name: nm.selIndicator, value: nm.store.link.sel.substring(1)}] : undefined,
+					success: function(data) {
+						nm._setCont(data, nm.store.link.sel);
+					},
+					error: function(jqXHR) {
+						nm._error(jqXHR);
+					}
+				}));
 			},
 			destroy: function(nm) {
 				nm.opener.off('click.nyroModal');
