@@ -1,7 +1,7 @@
 nyroModal jQuery Plugin
 =======================
 
-Writted and tested with jQuery 1.8.2.
+Writted and tested with jQuery 1.9.0.
 
 Tested in all majors browsers:
 - Firefox 3.6.12 (Windows)
@@ -18,7 +18,7 @@ nyroModal is licensed under the MIT License.
 
 ##How to use it
 
-You need to include jQuery 1.8.2 on your page.
+You need to include jQuery 1.9.0 on your page.
 Then add js/jquery.nyroModal.complete.js
 Include styles/nyroModal.css. You will also need the images stored in the img folder.
 To add compabitibilty with IE6, you have to add the following :
