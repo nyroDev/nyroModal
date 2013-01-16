@@ -71,7 +71,7 @@ jQuery(function($, undefined) {
 							nm.elts.cont.addClass('nyroModalImg');
 							nm.elts.hidden.addClass('nyroModalImg');
 							nm._setCont(this);
-						}).error(function() {
+						}).on('error', function() {
 							nm._error();
 						})
 						.attr('src', nm.store.embedly.url);

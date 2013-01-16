@@ -87,7 +87,7 @@ jQuery(function($, undefined) {
 							}
 						}
 					})
-					.error(function() {
+					.on('error', function() {
 						rmFormFileElts();
 						nm._error();
 					});
