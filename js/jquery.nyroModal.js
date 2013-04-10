@@ -45,6 +45,7 @@ jQuery(function($, undefined) {
 			anims: {},	// Sepcific animations functions
 			loadFilter: undefined,	// Name of the filter used for loading
 
+			enabled: true, // Indicates if it's enabled or not
 			modal: false,	// Indicates if it's a modal window or not
 			closeOnEscape: true,	// Indicates if the modal should close on Escape key
 			closeOnClick: true,	// Indicates if a click on the background should close the modal
@@ -131,6 +132,8 @@ jQuery(function($, undefined) {
 			},
 			// Open the modal
 			open: function() {
+				if (!this.enabled)
+					return false;
 				if (this._nmOpener)
 					this._nmOpener._close();
 				this.getInternal()._pushStack(this.opener);
@@ -651,9 +654,11 @@ jQuery(function($, undefined) {
 				nm._callFilters('initFilters');
 				nm._callFilters('init');
 				nm.opener
-					.off('nyroModal.nyroModal nmClose.nyroModal nmResize.nyroModal')
+					.off('nyroModal.nyroModal nmDisable.nyroModal nmEnable.nyroModal nmClose.nyroModal nmResize.nyroModal')
 					.on({
 						'nyroModal.nyroModal': 	function() { nm.open(); return false;},
+						'nmDisable.nyroModal': 	function() { nm.enabled = false; return false;},
+						'nmEnable.nyroModal': 	function() { nm.enabled = true; return false;},
 						'nmClose.nyroModal': 	function() { nm.close(); return false;},
 						'nmResize.nyroModal': 	function() { nm.resize(); return false;}
 					});

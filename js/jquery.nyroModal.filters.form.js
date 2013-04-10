@@ -24,12 +24,9 @@ jQuery(function($, undefined) {
 				});
 			},
 			load: function(nm) {
-				var data = {};
-				$.map(nm.opener.serializeArray(), function(d) {
-					data[d.name] = d.value;
-				});
+				var data = nm.opener.serializeArray();
 				if (nm.store.form.sel)
-					data[nm.selIndicator] = nm.store.form.sel.substring(1);
+					data.push({name: nm.selIndicator, value: nm.store.form.sel.substring(1)});
 				$.ajax($.extend(true, { type : 'get', dataType : 'text' }, nm.ajax || {}, {
 					url: nm.store.form.url,
 					data: data,
