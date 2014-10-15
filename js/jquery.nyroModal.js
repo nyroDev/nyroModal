@@ -696,11 +696,13 @@ jQuery(function($, undefined) {
 				});
 			},
 			_resize: function() {
-				var opens = $(':nmOpen').each(function() {
-					$(this).data('nmObj')._unreposition();
+				$.each(this.stack, function(k, v) {
+					v.nmObj._unreposition();
 				});
 				this._calculateFullSize();
-				opens.trigger('nmResize');
+				$.each(this.stack, function(k, v) {
+					v.nmObj.resize();
+				});
 			},
 			_calculateFullSize: function() {
 				this.fullSize = {
