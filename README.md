@@ -18,8 +18,9 @@ nyroModal is licensed under the MIT License.
 
 ##How to use it
 
+Go to http://nyromodal.nyrodev.com/ and download your package.
 You need to include jQuery 1.9.0 on your page.
-Then add js/jquery.nyroModal.complete.js
+Then you can include jquery.nyromodal.custom.js on your page.
 Include styles/nyroModal.css. You will also need the images stored in the img folder.
 To add compabitibilty with IE6, you have to add the following :
     <!--[if IE 6]>
