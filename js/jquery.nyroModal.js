@@ -121,6 +121,7 @@ jQuery(function($, undefined) {
 			_loading: false,	// Indicates if the loading is shown
 			_animated: false,	// Indicates if the modal is currently animated
 			_transition: false,	//Indicates if the modal is in transition
+			_needClose: false, // Indicates if the modal should close after current animation
 			_nmOpener: undefined,	// nmObj of the modal that opened the current one in non stacking mode
 			_nbContentLoading: 0,	// Counter for contentLoading call
 			_scripts: '',	// Scripts tags to be included
@@ -236,30 +237,38 @@ jQuery(function($, undefined) {
 			// Internal function for closing a nyroModal
 			// Will call 'close' callback filter
 			_close: function() {
-				this.getInternal()._removeStack(this.opener);
-				this._opened = false;
-				this._open = false;
-				this._callFilters('close');
+				if (!this._animated) {
+					this.getInternal()._removeStack(this.opener);
+					this._opened = false;
+					this._open = false;
+					this._callFilters('close');
+					return true;
+				} else {
+					this._needClose = true;
+				}
+				return false;
 			},
 			// Public function for closing a nyroModal
 			close: function() {
-				this._close();
-				this._callFilters('beforeClose');
-				var self = this;
-				this._unreposition();
-				self._callAnim('hideCont', function() {
-					self._callAnim('hideLoad', function() {
-						self._callAnim('hideBg', function() {
-							self._callFilters('afterClose');
-							self.elts.cont.remove();
-							self.elts.hidden.remove();
-							self.elts.load.remove();
-							self.elts.bg.remove();
-							self.elts.all.remove();
-							self.elts.cont = self.elts.hidden = self.elts.load = self.elts.bg = self.elts.all = undefined;
+				if (this._close()) {
+					this._needClose = false;
+					this._callFilters('beforeClose');
+					var self = this;
+					this._unreposition();
+					self._callAnim('hideCont', function() {
+						self._callAnim('hideLoad', function() {
+							self._callAnim('hideBg', function() {
+								self._callFilters('afterClose');
+								self.elts.cont.remove();
+								self.elts.hidden.remove();
+								self.elts.load.remove();
+								self.elts.bg.remove();
+								self.elts.all.remove();
+								self.elts.cont = self.elts.hidden = self.elts.load = self.elts.bg = self.elts.all = undefined;
+							});
 						});
 					});
-				});
+				}
 			},
 			
 			// Public function for destroying a nyroModal instance, only for non open modal
@@ -443,6 +452,8 @@ jQuery(function($, undefined) {
 							this._animated = false;
 							this._callFilters('after'+ucfirst(fct));
 							clb();
+							if (this._needClose)
+								setTimeout($.proxy(function() {this.close();}, this), 50);
 						}, this));
 				}
 			},
