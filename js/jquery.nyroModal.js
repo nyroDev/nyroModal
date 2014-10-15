@@ -852,11 +852,6 @@ jQuery(function($, undefined) {
 				},
 				initElts: function(nm) {
 					nm.elts.bg.addClass('nyroModalBg');
-					if (nm.closeOnClick)
-						nm.elts.bg.off('click.nyroModal').on('click.nyroModal', function(e) {
-							e.preventDefault();
-							nm.close();
-						});
 					nm.elts.cont.addClass('nyroModalCont');
 					nm.elts.hidden.addClass('nyroModalCont nyroModalHidden');
 					nm.elts.load.addClass('nyroModalCont nyroModalLoad');
@@ -873,6 +868,13 @@ jQuery(function($, undefined) {
 							cur.nyroModal(nm.getForNewLinks(cur), true);
 						}).end()
 						.find('.nyroModalClose').on('click.nyroModal', function(e) {
+							e.preventDefault();
+							nm.close();
+						});
+				},
+				afterShowCont: function(nm) {
+					if (nm.closeOnClick)
+						nm.elts.bg.off('click.nyroModal').on('click.nyroModal', function(e) {
 							e.preventDefault();
 							nm.close();
 						});
