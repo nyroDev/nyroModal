@@ -72,7 +72,7 @@ jQuery(function($, undefined) {
 			ajax: {}, // Ajax options to be used in link and form filter
 			
 			// Specific confirguation for image filter
-			imageRegex: '[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\s*$',	// Regex used to detect image link
+			imageRegex: '[^\.]\.(jpg|jpeg|png|tiff|gif|bmp)\\s*$',	// Regex used to detect image link
 
 			selIndicator: 'nyroModalSel', // Value added when a form or Ajax is sent with a filter content
 
