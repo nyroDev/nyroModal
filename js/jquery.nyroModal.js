@@ -414,7 +414,7 @@ jQuery(function($, undefined) {
 			// - prm: Parameter to be used in callback
 			// return an array of all return of callbacks; keys are filters name
 			_callFilters: function(fct, prm) {
-				this.getInternal()._debug(fct);
+				this.getInternal()._debug(fct, prm);
 				var ret = [],
 					self = this;
 				$.each(this.filters, function(i, f) {
@@ -441,7 +441,7 @@ jQuery(function($, undefined) {
 			// - fct: Animation function name
 			// - clb: Callback once the animation is done
 			_callAnim: function(fct, clb) {
-				this.getInternal()._debug(fct);
+				this.getInternal()._debug(fct, clb);
 				this._callFilters('before'+ucfirst(fct));
 				if (!this._animated) {
 					this._animated = true;
@@ -654,9 +654,9 @@ jQuery(function($, undefined) {
 				return undefined;
 			},
 
-			_debug: function(msg) {
+			_debug: function() {
 				if (this.debug && window.console && window.console.log)
-					window.console.log(msg);
+					window.console.log.apply(window.console, arguments);
 			},
 
 			_container: undefined,
