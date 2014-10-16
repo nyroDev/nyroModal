@@ -239,13 +239,15 @@ jQuery(function($, undefined) {
 			_close: function() {
 				var ret = true;
 				if (!this._animated) {
-					this.getInternal()._removeStack(this.opener);
-					this._opened = false;
-					this._open = false;
 					$.each(this._callFilters('close'), function(k, v) {
 						if (v === false)
 							ret = false;
 					});
+					if (ret) {
+						this.getInternal()._removeStack(this.opener);
+						this._opened = false;
+						this._open = false;
+					}
 				} else {
 					this._needClose = true;
 					ret = false;
@@ -419,7 +421,7 @@ jQuery(function($, undefined) {
 					ret[f] = self._callFilter(f, fct, prm);
 				});
 				if (this.callbacks[fct] && $.isFunction(this.callbacks[fct]))
-					this.callbacks[fct](this, prm);
+					ret['callbacks'] = this.callbacks[fct](this, prm);
 				return ret;
 			},
 
