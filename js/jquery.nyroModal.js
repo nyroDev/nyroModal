@@ -237,16 +237,20 @@ jQuery(function($, undefined) {
 			// Internal function for closing a nyroModal
 			// Will call 'close' callback filter
 			_close: function() {
+				var ret = true;
 				if (!this._animated) {
 					this.getInternal()._removeStack(this.opener);
 					this._opened = false;
 					this._open = false;
-					this._callFilters('close');
-					return true;
+					$.each(this._callFilters('close'), function(k, v) {
+						if (v === false)
+							ret = false;
+					});
 				} else {
 					this._needClose = true;
+					ret = false;
 				}
-				return false;
+				return ret;
 			},
 			// Public function for closing a nyroModal
 			close: function() {
