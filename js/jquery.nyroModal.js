@@ -423,6 +423,11 @@ jQuery(function($, undefined) {
 			// return an array of all return of callbacks; keys are filters name
 			_callFilters: function(fct, prm) {
 				this.getInternal()._debug(fct, prm);
+				if (this.opener && this.opener.length) {
+					this.opener.trigger(fct+'.nyroModal', [this, prm]);
+				} else {
+					$b.trigger(fct+'.nyroModal', [this, prm]);
+				}
 				var ret = [],
 					self = this;
 				$.each(this.filters, function(i, f) {
