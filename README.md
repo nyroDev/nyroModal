@@ -287,3 +287,8 @@ $.nmInternal({
   }
 });
 ```
+
+
+##Help
+You can find some useful tips on the [issues labeled with tips](https://github.com/nyroDev/nyroModal/issues?q=label%3Atips+)
+If it's still not enought, be free to open an Issue on github.
