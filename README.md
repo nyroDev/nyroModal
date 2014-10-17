@@ -23,12 +23,16 @@ You need to include jQuery on your page.
 Then you can include jquery.nyromodal.custom.js on your page.
 Include styles/nyroModal.css. You will also need the images stored in the img folder.
 To add compabitibilty with IE6, you have to add the following :
-    <!--[if IE 6]>
-      <script type="text/javascript" src="js/jquery.nyroModal-ie6.js"></script>
-    <![endif]-->
+```
+<!--[if IE 6]>
+  <script type="text/javascript" src="js/jquery.nyroModal-ie6.js"></script>
+<![endif]-->
+```
 
 Then, add the nyroModal functionnality to your links:
-    $('YOUR SELECTOR').nyroModal();
+```
+$('YOUR SELECTOR').nyroModal();
+```
 This will work on many kind of elements, depending of what you included as nyroModal filters (see below)
 
 ##Functions available
@@ -38,9 +42,11 @@ nyroModal comes with a lot of functions that tou could use through your programm
 ###$.fn.nyroModal(opts, fullObj);
 This is obviously the most useful. It enables the nyroModal functionnality on the element when clicked or submitted for a form.
 You have to call it to add the bind. The most usual place might be on a ready page event like:
-    $(function() {
-      $('.nyroModal').nyroModal();
-    });
+```
+$(function() {
+  $('.nyroModal').nyroModal();
+});
+```
 Parameters: 
 - opts: the options parameter might be used in order to change the setting for the specified nyroModal objects
 - fullObj: a boolean to indicate if the options parameter is actually a fully nyroModal object
@@ -54,9 +60,11 @@ This function is used in order to initliaze the nyroModal object as data of DOM 
 This function will result by create a data('nmObj') on the jQuery object representing the DOM node.
 This function is used internally, it shouldn't be use in most of case.
 Usage example:
-    $(function() {
-      $('.nyroModal').nmInit();
-    });
+```
+$(function() {
+  $('.nyroModal').nmInit();
+});
+```
 Parameters: 
 - opts: the options parameter might be used in order to change the setting for the specified nyroModal objects
 - fullObj: a boolean to indicate if the options parameter is actually a fully nyroModal object
@@ -64,16 +72,22 @@ Parameters:
 ###$.fn.nmCall();
 This function is used to open the nyroModal on a DOM element that already have been initalised with the nyroModal or nm functions.
 Usage example:
-    $('#myLink').nmCall();
+```
+$('#myLink').nmCall();
+```
 
 Note: This code has exaclty the same effect than triggering a nyroModal event like:
-    $('#myLink').trigger('nyroModal');
+```
+$('#myLink').trigger('nyroModal');
+```
 
 ###$.nmManual(url, opts);
 This function is used to manually open a nyroModal by giving only an url.
 To use it, **the Link Filter is required**.
 Example usage:
-    $.nmManual('page.html');
+```
+$.nmManual('page.html');
+```
 Parameters: 
 - url: The url to open. it might a DOM selector or anything else
 - opts: the options parameter might be used in order to change the setting for the specified nyroModal objects
@@ -82,7 +96,9 @@ Parameters:
 This function is used to manually open a nyroModal by giving it's content.
 To use it, **the Link Filter and the Data Filter are required**.
 Example usage:
-    $.nmData('my content<br />is so greaaaaaaaaaaaat !');
+```
+$.nmData('my content<br />is so greaaaaaaaaaaaat !');
+```
 Parameters: 
 - data: The data to be shown inside the modal
 - opts: the options parameter might be used in order to change the setting for the specified nyroModal objects
@@ -91,42 +107,46 @@ Parameters:
 This is used to overwrite the default function or settings of the nyroModal object created when initialising a nyroModal Object.
 This could be used to change the default animations to use or change the default behavior of the nyroModal.
 Exemple usage:
-    $(function() {
-      $.nmObj({anim: {def: 'fade'}});
-    });
+```
+$(function() {
+  $.nmObj({anim: {def: 'fade'}});
+});
+```
 
 ###$.nmInternal(opts);
 This is used to overwrite internal object of nyroModal used in many places in the code.
 This could be used to change the default behavior of nyroModal.
 Exemple usage in jquery.nyroModal-ie6 in order to calculate the size according to this browser:
-    $.nmInternal({
-      _calculateFullSize: function() {
-        var scrollHeight = Math.max(
-          document.documentElement.scrollHeight,
-          document.body.scrollHeight
-        ),
-        offsetHeight = Math.max(
-          document.documentElement.offsetHeight,
-          document.body.offsetHeight
-        ),
-        scrollWidth = Math.max(
-          document.documentElement.scrollWidth,
-          document.body.scrollWidth
-        ),
-        offsetWidth = Math.max(
-          document.documentElement.offsetWidth,
-          document.body.offsetWidth
-        );
-        this.fullSize = {
-          wW: $w.width(),
-          wH: $w.height()
-        };
-        this.fullSize.h = scrollHeight < offsetHeight ? $w.height() : scrollHeight;
-        this.fullSize.w = scrollWidth < offsetWidth ? $w.width() : scrollWidth;
-        this.fullSize.viewW = Math.min(this.fullSize.w, this.fullSize.wW);
-        this.fullSize.viewH = Math.min(this.fullSize.h, this.fullSize.wH);
-      }
-    });
+```
+$.nmInternal({
+  _calculateFullSize: function() {
+	var scrollHeight = Math.max(
+	  document.documentElement.scrollHeight,
+	  document.body.scrollHeight
+	),
+	offsetHeight = Math.max(
+	  document.documentElement.offsetHeight,
+	  document.body.offsetHeight
+	),
+	scrollWidth = Math.max(
+	  document.documentElement.scrollWidth,
+	  document.body.scrollWidth
+	),
+	offsetWidth = Math.max(
+	  document.documentElement.offsetWidth,
+	  document.body.offsetWidth
+	);
+	this.fullSize = {
+	  wW: $w.width(),
+	  wH: $w.height()
+	};
+	this.fullSize.h = scrollHeight < offsetHeight ? $w.height() : scrollHeight;
+	this.fullSize.w = scrollWidth < offsetWidth ? $w.width() : scrollWidth;
+	this.fullSize.viewW = Math.min(this.fullSize.w, this.fullSize.wW);
+	this.fullSize.viewH = Math.min(this.fullSize.h, this.fullSize.wH);
+  }
+});
+```
 
 ###$.nmAnims(opts);
 This is used to add or overwrite animations pack.
@@ -148,7 +168,9 @@ nyroModal defines 3 selectors that could be used transparently in your code like
 ###:nyroModal
 This selector retrieves all elements that was binded using the nyroModal() function.
 For instance, if you want to open all modal at the same time (not recommended), you can do:
-    $(':nyroModal').nmCall();
+```
+$(':nyroModal').nmCall();
+```
 
 ###:nm
 This is an alias for the previous selector, :nyroModal.
@@ -157,9 +179,11 @@ they both do exactly the same.
 ###:nmOpen
 This selector retrieves all modals that are curently opened.
 This could be useful to close them all at the same time:
-    $(':nmOpen').each(function() {
-      $(this).data('nmObj').close();
-    }):
+```
+$(':nmOpen').each(function() {
+  $(this).data('nmObj').close();
+}):
+```
 
 
 ## nyroModal Object
@@ -260,9 +284,11 @@ In order to enable the debug mode, you should change the debug value of the inte
     $.nmInternal({debug: true});
 
 By default, the debug function show function name in the console. If you want do something else, you should overwrite the _debug function like:
-    $.nmInternal({
-      _debug: function(msg) {
-        if (this.debug && window.console && window.console.log)
-          window.console.log(msg);
-      }
-    });
+```
+$.nmInternal({
+  _debug: function(msg) {
+	if (this.debug && window.console && window.console.log)
+	  window.console.log(msg);
+  }
+});
+```
