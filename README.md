@@ -1,8 +1,6 @@
 nyroModal jQuery Plugin
 =======================
 
-Writted and tested with jQuery 1.9.0.
-
 Tested in all majors browsers:
 - Firefox
 - Chrome
