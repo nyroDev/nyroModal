@@ -344,7 +344,7 @@ jQuery(function($, undefined) {
 					.append(this._filterScripts(html))
 					.prepend(this.header)
 					.append(this.footer)
-					.wrapInner($('<div />', {'class': 'nyroModal'+ucfirst(this.loadFilter)}));
+					.wrapInner($('<div />', {'class': 'nyroModal'+$.ucfirst(this.loadFilter)}));
 
 				// Store the size of the element
 				this.sizes.initW = this.sizes.w = this.elts.hidden.width();
@@ -442,7 +442,7 @@ jQuery(function($, undefined) {
 			// - clb: Callback once the animation is done
 			_callAnim: function(fct, clb) {
 				this.getInternal()._debug(fct, clb);
-				this._callFilters('before'+ucfirst(fct));
+				this._callFilters('before'+$.ucfirst(fct));
 				if (!this._animated) {
 					this._animated = true;
 					if (!$.isFunction(clb)) clb = $.noop;
@@ -456,7 +456,7 @@ jQuery(function($, undefined) {
 					}
 					curFct(this, $.proxy(function() {
 							this._animated = false;
-							this._callFilters('after'+ucfirst(fct));
+							this._callFilters('after'+$.ucfirst(fct));
 							clb();
 							if (this._needClose)
 								setTimeout($.proxy(function() {this.close();}, this), 50);
@@ -954,15 +954,19 @@ jQuery(function($, undefined) {
 	jQuery.fn[sr] = function(fn){  return fn ? this.on('resize', debounce(fn)) : this.trigger(sr); };
 
 })(jQuery,'smartresize');
+
 // ucFirst
-function ucfirst(str) {
-    // http://kevin.vanzonneveld.net
-    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-    // +   bugfixed by: Onno Marsman
-    // +   improved by: Brett Zamir (http://brett-zamir.me)
-    // *     example 1: ucfirst('kevin van zonneveld');
-    // *     returns 1: 'Kevin van zonneveld'
-    str += '';
-    var f = str.charAt(0).toUpperCase();
-    return f + str.substr(1);
-}
+// jquery plugin by: Baris Aydinoglu (http://baris.aydinoglu.info)
+(function($) {
+	$.ucfirst = function(str) {
+		// http://kevin.vanzonneveld.net
+		// +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+		// +   bugfixed by: Onno Marsman
+		// +   improved by: Brett Zamir (http://brett-zamir.me)
+		// *     example 1: ucfirst('kevin van zonneveld');
+		// *     returns 1: 'Kevin van zonneveld'
+		str+= '';
+		var f = str.charAt(0).toUpperCase();
+		return f + str.substr(1);
+	};
+})(jQuery);
