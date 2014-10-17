@@ -4,13 +4,10 @@ nyroModal jQuery Plugin
 Writted and tested with jQuery 1.9.0.
 
 Tested in all majors browsers:
-- Firefox 3.6.12 (Windows)
-- Chrome 7.0.517 (Windows)
-- Opera 10.63 (Windows)
-- Safari 5.0.2 (Windows)
-- Internet Explorer 8 (Windows)
-- Internet Explorer 7 (Windows)
-- Internet Explorer 6 (Windows)
+- Firefox
+- Chrome
+- Safari
+- Internet Explorer
 
 ##License
 
