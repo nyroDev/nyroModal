@@ -276,7 +276,9 @@ Here is a list of the filters officially provided:
 
 ##Debug
 In order to enable the debug mode, you should change the debug value of the internal object. You can do it like:
-    $.nmInternal({debug: true});
+```
+$.nmInternal({debug: true});
+```
 
 By default, the debug function show function name in the console. If you want do something else, you should overwrite the _debug function like:
 ```
@@ -291,4 +293,5 @@ $.nmInternal({
 
 ##Help
 You can find some useful tips on the [issues labeled with tips](https://github.com/nyroDev/nyroModal/issues?q=label%3Atips+)
+
 If it's still not enought, be free to open an Issue on github.
