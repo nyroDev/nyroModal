@@ -214,14 +214,14 @@ The list of all function or callback that can be called in a filter:
 
 * is: should return true or false to select the filter for the current or element or not. This function is **REQUIRED** !
 * initFilters: called just after every filters have been determined to use or not, and just before the init of them. Good place to force filters.
-* init: called at the very beggining of the process. This function should bind element or create object needed later
-* initElts: called at the beggining of the open process, juste before the load start. After that, all the needed div are created and attached to the DOM
+* init: called at the very beginning of the process. This function should bind element or create object needed later
+* initElts: called at the beginning of the open process, juste before the load start. After that, all the needed div are created and attached to the DOM
 * load: called only for ONE filter defined in nm.loadFilter attribute. This function should load the function and set it's content using the **_setCont** function
 * filledContent: called once the content is placed on the hidden div
 * error: called in case of error (URL not founr for example)
 * size: called after the size has been defined
 * close: called at the end of the closing process, regarding only the data (useful for gallery)
-* beforeClose: called at the beggining of the closing process, regarding the animation
+* beforeClose: called at the beginning of the closing process, regarding the animation
 * afterClose: called at the end of the closing process, regarding the animation
 * keyHandle: called when a key is hit if the keyHandle is enable and if the modal is on the top
 
